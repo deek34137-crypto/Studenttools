@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
@@ -72,21 +71,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const adsenseEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true'
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-  const shouldLoadAdsense = adsenseEnabled && Boolean(adsenseClient)
-
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <head>
-        {shouldLoadAdsense && (
-          <Script
-            id="adsbygoogle-init"
-            strategy="afterInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-            crossOrigin="anonymous"
-          />
-        )}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1405060407756207"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-white text-slate-900`}>
         <Header />
