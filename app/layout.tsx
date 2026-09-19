@@ -14,7 +14,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://studenttools.cyou'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'),
   title: {
     default: 'StudentTools — Free Calculators for Students, Exams, Careers & Finance',
     template: '%s | StudentTools',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://studenttools.cyou',
+    url: 'https://www.studenttools.cyou',
     siteName: 'StudentTools',
     title: 'StudentTools — Fast, Free Calculators for Students & Professionals',
     description:

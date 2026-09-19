@@ -5,7 +5,7 @@ import { getAllPublishedSlugs } from '../lib/db/articles'
 export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://studenttools.cyou'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
   const currentDate = new Date()
 
   // Static / Hub pages
