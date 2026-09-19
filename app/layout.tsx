@@ -64,6 +64,17 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
   },
+  other: {
+    ...(process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' &&
+    process.env.NEXT_PUBLIC_ADSENSE_CLIENT &&
+    /^(ca-)?pub-\d+$/.test(process.env.NEXT_PUBLIC_ADSENSE_CLIENT.trim())
+      ? {
+          'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_CLIENT.trim().startsWith('ca-')
+            ? process.env.NEXT_PUBLIC_ADSENSE_CLIENT.trim()
+            : `ca-${process.env.NEXT_PUBLIC_ADSENSE_CLIENT.trim()}`,
+        }
+      : {}),
+  },
 }
 
 export default function RootLayout({
@@ -71,14 +82,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const adsenseEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true'
+  const rawClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim()
+  const adsenseClient =
+    rawClient && rawClient.startsWith('pub-') ? `ca-${rawClient}` : rawClient
+  const shouldLoadAdsense =
+    adsenseEnabled && Boolean(adsenseClient && /^ca-pub-\d+$/.test(adsenseClient))
+
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1405060407756207"
-          crossOrigin="anonymous"
-        />
+        {shouldLoadAdsense && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-white text-slate-900`}>
         <Header />

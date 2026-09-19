@@ -5,10 +5,13 @@ interface AdPlaceholderProps {
 
 export function AdPlaceholder({ slot, className = '' }: AdPlaceholderProps) {
   const adsenseEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true'
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || 'ca-pub-1405060407756207'
+  const rawClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim()
+  const adsenseClient =
+    rawClient && rawClient.startsWith('pub-') ? `ca-${rawClient}` : rawClient
+  const isValidClient = Boolean(adsenseClient && /^ca-pub-\d+$/.test(adsenseClient))
 
-  // If AdSense is enabled, render official AdSense tag container
-  if (adsenseEnabled && adsenseClient) {
+  // If AdSense is explicitly enabled and valid client ID is configured, render official AdSense container
+  if (adsenseEnabled && isValidClient && adsenseClient) {
     return (
       <div
         className={`w-full overflow-hidden my-6 flex justify-center items-center bg-slate-50 border border-slate-200 rounded-lg min-h-[90px] ${className}`}
