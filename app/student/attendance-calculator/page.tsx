@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Attendance Calculator 2025-26 (75% UGC Rule & Safe Bunk Allowance) | StudentTools",
   description: "Calculate your exact 2025-26 college attendance percentage, classes needed for 75% UGC criteria, and how many lectures you can safely bunk.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/attendance-calculator',
+    canonical: 'https://www.studenttools.cyou/student/attendance-calculator',
   },
   openGraph: {
     title: "Attendance Calculator 2025-26 (75% UGC Rule & Safe Bunk Allowance) | StudentTools",
     description: "Calculate your exact 2025-26 college attendance percentage, classes needed for 75% UGC criteria, and how many lectures you can safely bunk.",
-    url: 'https://studenttools.cyou/student/attendance-calculator',
+    url: 'https://www.studenttools.cyou/student/attendance-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

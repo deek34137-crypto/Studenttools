@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   description:
     'Comprehensive guides on JEE scoring, NTA percentile normalization, CBSE CGPA conversions, Indian take-home salary calculations, EMI schedules, and everyday math.',
   alternates: {
-    canonical: 'https://studenttools.cyou/blog',
+    canonical: 'https://www.studenttools.cyou/blog',
   },
   openGraph: {
     title: 'Educational Guides, Formula Walkthroughs & Student Advice | StudentTools Blog',
     description:
       'In-depth, search-intent-focused educational articles explaining mathematical formulas, exam rules, and Indian career compensation.',
-    url: 'https://studenttools.cyou/blog',
+    url: 'https://www.studenttools.cyou/blog',
     siteName: 'StudentTools',
     type: 'website',
   },

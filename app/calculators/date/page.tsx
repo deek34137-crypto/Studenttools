@@ -9,15 +9,15 @@ const ROUTE = '/calculators/date'
 const TOOL_ID = 'calculators-date'
 
 export const metadata: Metadata = {
-  title: "Date Calculator (Days Between Dates & Add/Subtract Days) | StudentTools",
-  description: "Calculate exact days, weeks, months, and business days between two dates, or add and subtract days to compute future deadlines.",
+  title: "Date Calculator 2025 (Days Between Dates, Business Days & Add/Subtract) | StudentTools",
+  description: "Calculate days between any two dates in 2025, count business days, add or subtract days, and find future deadlines accurately.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/date',
+    canonical: 'https://www.studenttools.cyou/calculators/date',
   },
   openGraph: {
-    title: "Date Calculator (Days Between Dates & Add/Subtract Days) | StudentTools",
-    description: "Calculate exact days, weeks, months, and business days between two dates, or add and subtract days to compute future deadlines.",
-    url: 'https://studenttools.cyou/calculators/date',
+    title: "Date Calculator 2025 (Days Between Dates, Business Days & Add/Subtract) | StudentTools",
+    description: "Calculate days between any two dates in 2025, count business days, add or subtract days, and find future deadlines accurately.",
+    url: 'https://www.studenttools.cyou/calculators/date',
     siteName: 'StudentTools',
     type: 'website',
   },

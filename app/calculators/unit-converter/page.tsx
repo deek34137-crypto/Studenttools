@@ -9,15 +9,15 @@ const ROUTE = '/calculators/unit-converter'
 const TOOL_ID = 'calculators-unit-converter'
 
 export const metadata: Metadata = {
-  title: "Unit Converter (Length, Mass, Temperature, Area & Digital Units) | StudentTools",
-  description: "Universal unit converter. Convert meters to feet, kilograms to pounds, Celsius to Fahrenheit, acres to bigha, and more.",
+  title: "Unit Converter 2025 (Length, Mass, Temperature, Area, Volume, Speed & Digital Units) | StudentTools",
+  description: "Universal unit converter 2025. Convert length, mass, temperature, area, volume, speed, and digital storage units instantly on any device.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/unit-converter',
+    canonical: 'https://www.studenttools.cyou/calculators/unit-converter',
   },
   openGraph: {
-    title: "Unit Converter (Length, Mass, Temperature, Area & Digital Units) | StudentTools",
-    description: "Universal unit converter. Convert meters to feet, kilograms to pounds, Celsius to Fahrenheit, acres to bigha, and more.",
-    url: 'https://studenttools.cyou/calculators/unit-converter',
+    title: "Unit Converter 2025 (Length, Mass, Temperature, Area, Volume, Speed & Digital Units) | StudentTools",
+    description: "Universal unit converter 2025. Convert length, mass, temperature, area, volume, speed, and digital storage units instantly on any device.",
+    url: 'https://www.studenttools.cyou/calculators/unit-converter',
     siteName: 'StudentTools',
     type: 'website',
   },

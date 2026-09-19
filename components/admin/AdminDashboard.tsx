@@ -148,13 +148,13 @@ Target Category: ${topic.category}
 Primary Keyword: ${topic.primary_keyword}
 Secondary Keywords: ${topic.secondary_keywords}
 Content Angle / Guidelines: ${topic.content_angle}
-Related Calculator Tool: ${topic.related_tool} (URL: https://studenttools.cyou${topic.related_tool_slug})
+Related Calculator Tool: ${topic.related_tool} (URL: https://www.studenttools.cyou${topic.related_tool_slug})
 
 Structure & Formatting Requirements:
 1. At least 3 major sections with H2 headings (## Heading).
 2. Include clean Markdown tables with | Column 1 | Column 2 | where relevant.
 3. Realistic numerical examples, formulas, or cutoff benchmarks.
-4. Naturally reference and link to the related calculator tool: [${topic.related_tool}](https://studenttools.cyou${topic.related_tool_slug}).
+4. Naturally reference and link to the related calculator tool: [${topic.related_tool}](https://www.studenttools.cyou${topic.related_tool_slug}).
 5. Provide 2-3 Frequently Asked Questions (FAQ) with answers at the end.
 6. Highly engaging, professional, human tone. Do NOT include phrases like 'As an AI language model', 'In conclusion it is crucial', or placeholder text.`
 

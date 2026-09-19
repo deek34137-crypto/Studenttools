@@ -9,15 +9,15 @@ const ROUTE = '/career/monthly-to-annual-salary'
 const TOOL_ID = 'career-monthly-to-annual-salary'
 
 export const metadata: Metadata = {
-  title: "Monthly to Annual Salary Calculator (Yearly, Weekly & Daily Rates) | StudentTools",
-  description: "Quickly convert your monthly earnings into annual gross salary, quarterly figures, weekly pay, and hourly rates.",
+  title: "Monthly to Annual Salary Calculator 2025-26 (Yearly, Weekly & Daily Rates) | StudentTools",
+  description: "Convert your 2025-26 monthly earnings into annual gross salary, quarterly figures, weekly pay, and hourly rates instantly.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/monthly-to-annual-salary',
+    canonical: 'https://www.studenttools.cyou/career/monthly-to-annual-salary',
   },
   openGraph: {
-    title: "Monthly to Annual Salary Calculator (Yearly, Weekly & Daily Rates) | StudentTools",
-    description: "Quickly convert your monthly earnings into annual gross salary, quarterly figures, weekly pay, and hourly rates.",
-    url: 'https://studenttools.cyou/career/monthly-to-annual-salary',
+    title: "Monthly to Annual Salary Calculator 2025-26 (Yearly, Weekly & Daily Rates) | StudentTools",
+    description: "Convert your 2025-26 monthly earnings into annual gross salary, quarterly figures, weekly pay, and hourly rates instantly.",
+    url: 'https://www.studenttools.cyou/career/monthly-to-annual-salary',
     siteName: 'StudentTools',
     type: 'website',
   },

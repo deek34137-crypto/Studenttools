@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Free Indian career tools: CTC to in-hand monthly salary breakdown, appraisal salary hike calculator, EPF interest projection, monthly to annual salary, and internship stipend calculator.',
   alternates: {
-    canonical: 'https://studenttools.cyou/career',
+    canonical: 'https://www.studenttools.cyou/career',
   },
 }
 

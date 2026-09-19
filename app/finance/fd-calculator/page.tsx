@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "FD Calculator 2025-26 (Fixed Deposit Quarterly Compounding & Maturity Value) | StudentTools",
   description: "Calculate bank FD maturity value and interest earned for 2025-26 with quarterly compounding. Includes senior citizen interest rate options.",
   alternates: {
-    canonical: 'https://studenttools.cyou/finance/fd-calculator',
+    canonical: 'https://www.studenttools.cyou/finance/fd-calculator',
   },
   openGraph: {
     title: "FD Calculator 2025-26 (Fixed Deposit Quarterly Compounding & Maturity Value) | StudentTools",
     description: "Calculate bank FD maturity value and interest earned for 2025-26 with quarterly compounding. Includes senior citizen interest rate options.",
-    url: 'https://studenttools.cyou/finance/fd-calculator',
+    url: 'https://www.studenttools.cyou/finance/fd-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Main Marks Calculator 2025-26 (Subject-Wise & Negative Marking) | StudentTools",
   description: "Calculate your JEE Main 2025-26 raw score with +4 for correct, -1 for incorrect answers. Review subject-wise performance and accuracy instantly.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/marks-calculator',
+    canonical: 'https://www.studenttools.cyou/jee/marks-calculator',
   },
   openGraph: {
     title: "JEE Main Marks Calculator 2025-26 (Subject-Wise & Negative Marking) | StudentTools",
     description: "Calculate your JEE Main 2025-26 raw score with +4 for correct, -1 for incorrect answers. Review subject-wise performance and accuracy instantly.",
-    url: 'https://studenttools.cyou/jee/marks-calculator',
+    url: 'https://www.studenttools.cyou/jee/marks-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },
@@ -46,6 +46,13 @@ export default function JeeMarksCalculatorPage() {
       assumptions={content.assumptions}
       disclaimer={content.disclaimer}
       faqs={content.faqs}
+      relatedArticles={[
+        {
+          title: 'How JEE Main Negative Marking Affects Your Total Score (2026 Strategy)',
+          slug: 'how-jee-main-negative-marking-affects-score',
+          excerpt: 'Comprehensive guide breaking down the +4/-1 marking scheme, the hidden 5-mark penalty, option elimination math, and shift normalization impact.',
+        },
+      ]}
     >
       <JeeMarksCalc />
     </CalculatorLayout>

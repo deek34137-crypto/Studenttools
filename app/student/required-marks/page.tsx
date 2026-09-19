@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Required Marks Calculator 2025-26 (Score Needed for Target Percentage) | StudentTools",
   description: "Determine the exact marks needed in your 2025-26 assessments and final exams to achieve your desired overall percentage or grade.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/required-marks',
+    canonical: 'https://www.studenttools.cyou/student/required-marks',
   },
   openGraph: {
     title: "Required Marks Calculator 2025-26 (Score Needed for Target Percentage) | StudentTools",
     description: "Determine the exact marks needed in your 2025-26 assessments and final exams to achieve your desired overall percentage or grade.",
-    url: 'https://studenttools.cyou/student/required-marks',
+    url: 'https://www.studenttools.cyou/student/required-marks',
     siteName: 'StudentTools',
     type: 'website',
   },

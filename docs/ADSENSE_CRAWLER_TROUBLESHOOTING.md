@@ -33,7 +33,7 @@ When AdSense is disabled (`NEXT_PUBLIC_ADSENSE_ENABLED="false"`), neither tag is
 
 ## 2. Robots.txt Configuration
 
-Google's crawler requires explicit confirmation that it is allowed to crawl the site. The application implements dynamic robots configuration at `app/robots.ts` (`https://studenttools.cyou/robots.txt`):
+Google's crawler requires explicit confirmation that it is allowed to crawl the site. The application implements dynamic robots configuration at `app/robots.ts` (`https://www.studenttools.cyou/robots.txt`):
 
 ```txt
 User-Agent: *
@@ -56,7 +56,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://studenttools.cyou/sitemap.xml
+Sitemap: https://www.studenttools.cyou/sitemap.xml
 ```
 
 ### Safety Guarantees:
@@ -68,7 +68,7 @@ Sitemap: https://studenttools.cyou/sitemap.xml
 
 ## 3. Dynamic ads.txt Implementation
 
-The `ads.txt` file is dynamically served by Next.js at `app/ads.txt/route.ts` (`https://studenttools.cyou/ads.txt`):
+The `ads.txt` file is dynamically served by Next.js at `app/ads.txt/route.ts` (`https://www.studenttools.cyou/ads.txt`):
 
 - **Format:** `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`
 - **Content-Type:** `text/plain; charset=utf-8`
@@ -85,7 +85,7 @@ In your **Vercel Project Dashboard** (`Settings` -> `Environment Variables`), co
 |---|---|---|
 | `NEXT_PUBLIC_ADSENSE_ENABLED` | **Yes** | `true` |
 | `NEXT_PUBLIC_ADSENSE_CLIENT` | **Yes** | `ca-pub-1405060407756207` |
-| `NEXT_PUBLIC_SITE_URL` | Yes | `https://studenttools.cyou` |
+| `NEXT_PUBLIC_SITE_URL` | Yes | `https://www.studenttools.cyou` |
 
 > **Important:** In Next.js, variables prefixed with `NEXT_PUBLIC_` are inlined into the client bundle at build time. Whenever you change `NEXT_PUBLIC_ADSENSE_ENABLED` or `NEXT_PUBLIC_ADSENSE_CLIENT`, you must trigger a **Redeploy** in Vercel.
 
@@ -156,7 +156,7 @@ Ensure your primary domain and subdomains resolve with clean HTTP status codes:
 
 ```bash
 # Check apex domain redirect
-curl -ILs https://studenttools.cyou/
+curl -ILs https://www.studenttools.cyou/
 
 # Check www subdomain
 curl -ILs https://www.studenttools.cyou/

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Terms of service and usage conditions for the free educational and calculation platform StudentTools.cyou.',
   alternates: {
-    canonical: 'https://studenttools.cyou/terms',
+    canonical: 'https://www.studenttools.cyou/terms',
   },
 }
 
@@ -31,7 +31,7 @@ export default function TermsPage() {
         <section className="space-y-2">
           <h2 className="text-lg font-bold text-slate-900">1. Acceptance of Terms</h2>
           <p>
-            By accessing or using <strong>StudentTools</strong> (<code className="text-sky-600 font-mono">https://studenttools.cyou</code>), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use the website.
+            By accessing or using <strong>StudentTools</strong> (<code className="text-sky-600 font-mono">https://www.studenttools.cyou</code>), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use the website.
           </p>
         </section>
 

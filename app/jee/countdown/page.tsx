@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Exam Countdown Timer 2025-26 (Days Left for Next JEE Main Session) | StudentTools",
   description: "Real-time countdown timer to upcoming JEE Main 2026 and Advanced exam dates. Track exact days, hours, and minutes remaining for your preparation.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/countdown',
+    canonical: 'https://www.studenttools.cyou/jee/countdown',
   },
   openGraph: {
     title: "JEE Exam Countdown Timer 2025-26 (Days Left for Next JEE Main Session) | StudentTools",
     description: "Real-time countdown timer to upcoming JEE Main 2026 and Advanced exam dates. Track exact days, hours, and minutes remaining for your preparation.",
-    url: 'https://studenttools.cyou/jee/countdown',
+    url: 'https://www.studenttools.cyou/jee/countdown',
     siteName: 'StudentTools',
     type: 'website',
   },

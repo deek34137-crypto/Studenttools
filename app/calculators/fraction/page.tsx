@@ -9,15 +9,15 @@ const ROUTE = '/calculators/fraction'
 const TOOL_ID = 'calculators-fraction'
 
 export const metadata: Metadata = {
-  title: "Fraction Calculator (Add, Subtract, Multiply, Divide & Simplify) | StudentTools",
-  description: "Free online fraction calculator. Add, subtract, multiply, and divide fractions with step-by-step simplification and mixed numbers.",
+  title: "Fraction Calculator 2025 (Add, Subtract, Multiply, Divide & Simplify with Steps) | StudentTools",
+  description: "Free online fraction calculator 2025. Add, subtract, multiply, and divide fractions with full step-by-step simplification and mixed number support.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/fraction',
+    canonical: 'https://www.studenttools.cyou/calculators/fraction',
   },
   openGraph: {
-    title: "Fraction Calculator (Add, Subtract, Multiply, Divide & Simplify) | StudentTools",
-    description: "Free online fraction calculator. Add, subtract, multiply, and divide fractions with step-by-step simplification and mixed numbers.",
-    url: 'https://studenttools.cyou/calculators/fraction',
+    title: "Fraction Calculator 2025 (Add, Subtract, Multiply, Divide & Simplify with Steps) | StudentTools",
+    description: "Free online fraction calculator 2025. Add, subtract, multiply, and divide fractions with full step-by-step simplification and mixed number support.",
+    url: 'https://www.studenttools.cyou/calculators/fraction',
     siteName: 'StudentTools',
     type: 'website',
   },

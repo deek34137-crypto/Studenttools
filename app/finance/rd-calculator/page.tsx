@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "RD Calculator 2025-26 (Recurring Deposit Maturity Amount & Interest) | StudentTools",
   description: "Calculate 2025-26 maturity value and interest earned on recurring monthly deposits across Indian commercial banks and post offices.",
   alternates: {
-    canonical: 'https://studenttools.cyou/finance/rd-calculator',
+    canonical: 'https://www.studenttools.cyou/finance/rd-calculator',
   },
   openGraph: {
     title: "RD Calculator 2025-26 (Recurring Deposit Maturity Amount & Interest) | StudentTools",
     description: "Calculate 2025-26 maturity value and interest earned on recurring monthly deposits across Indian commercial banks and post offices.",
-    url: 'https://studenttools.cyou/finance/rd-calculator',
+    url: 'https://www.studenttools.cyou/finance/rd-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

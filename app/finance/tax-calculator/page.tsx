@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Income Tax Calculator India FY 2025-26 (New vs Old Regime, Section 87A & Cess) | StudentTools",
   description: "Calculate Indian Income Tax liability. Compare New Tax Regime vs Old Tax Regime with standard deduction (₹75k), Section 87A rebate, and health cess.",
   alternates: {
-    canonical: 'https://studenttools.cyou/finance/tax-calculator',
+    canonical: 'https://www.studenttools.cyou/finance/tax-calculator',
   },
   openGraph: {
     title: "Income Tax Calculator India FY 2025-26 (New vs Old Regime, Section 87A & Cess) | StudentTools",
     description: "Calculate Indian Income Tax liability. Compare New Tax Regime vs Old Tax Regime with standard deduction (₹75k), Section 87A rebate, and health cess.",
-    url: 'https://studenttools.cyou/finance/tax-calculator',
+    url: 'https://www.studenttools.cyou/finance/tax-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -174,7 +174,7 @@ export async function executeDailyPublishPipeline(options?: {
 
   // 7. Assemble Complete Article Record
   const publishedAt = new Date().toISOString()
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://studenttools.cyou'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
   const publishedUrl = `${siteUrl}/blog/${articleData.slug}`
 
   // Estimate reading time (~200 words/min)

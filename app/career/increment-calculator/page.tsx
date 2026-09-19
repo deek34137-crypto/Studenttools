@@ -9,15 +9,15 @@ const ROUTE = '/career/increment-calculator'
 const TOOL_ID = 'career-increment-calculator'
 
 export const metadata: Metadata = {
-  title: "Increment Calculator (Percentage Hike Between Old & New Salary) | StudentTools",
-  description: "Compare your previous salary and revised salary to calculate the exact percentage increment and monthly gain.",
+  title: "Increment Calculator 2025-26 (Percentage Hike Between Old & New Salary) | StudentTools",
+  description: "Compare your previous and revised 2025-26 salary to calculate the exact percentage increment and monthly gain during appraisals.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/increment-calculator',
+    canonical: 'https://www.studenttools.cyou/career/increment-calculator',
   },
   openGraph: {
-    title: "Increment Calculator (Percentage Hike Between Old & New Salary) | StudentTools",
-    description: "Compare your previous salary and revised salary to calculate the exact percentage increment and monthly gain.",
-    url: 'https://studenttools.cyou/career/increment-calculator',
+    title: "Increment Calculator 2025-26 (Percentage Hike Between Old & New Salary) | StudentTools",
+    description: "Compare your previous and revised 2025-26 salary to calculate the exact percentage increment and monthly gain during appraisals.",
+    url: 'https://www.studenttools.cyou/career/increment-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "GPA Calculator 2025-26 (Credit-Weighted Semester SGPA & Quality Points) | StudentTools",
   description: "Calculate your 2025-26 weighted semester GPA (SGPA) using course credit hours and 10-point grade scale for Indian engineering and degree colleges.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/gpa-calculator',
+    canonical: 'https://www.studenttools.cyou/student/gpa-calculator',
   },
   openGraph: {
     title: "GPA Calculator 2025-26 (Credit-Weighted Semester SGPA & Quality Points) | StudentTools",
     description: "Calculate your 2025-26 weighted semester GPA (SGPA) using course credit hours and 10-point grade scale for Indian engineering and degree colleges.",
-    url: 'https://studenttools.cyou/student/gpa-calculator',
+    url: 'https://www.studenttools.cyou/student/gpa-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

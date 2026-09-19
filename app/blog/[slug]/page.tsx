@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     }
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://studenttools.cyou'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`
 
   return {
@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound()
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://studenttools.cyou'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`
 
   // Format date in Indian format

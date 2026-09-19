@@ -9,15 +9,15 @@ const ROUTE = '/calculators/bmi'
 const TOOL_ID = 'calculators-bmi'
 
 export const metadata: Metadata = {
-  title: "BMI Calculator (Body Mass Index & Healthy Weight Range) | StudentTools",
-  description: "Free Body Mass Index (BMI) calculator. Check your BMI score, WHO weight category, and healthy weight range for your height.",
+  title: "BMI Calculator 2025 (Body Mass Index, WHO Categories & Healthy Weight Range) | StudentTools",
+  description: "Free BMI calculator 2025. Check your Body Mass Index score, WHO weight category, Asian-Indian thresholds, and healthy weight range for your height.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/bmi',
+    canonical: 'https://www.studenttools.cyou/calculators/bmi',
   },
   openGraph: {
-    title: "BMI Calculator (Body Mass Index & Healthy Weight Range) | StudentTools",
-    description: "Free Body Mass Index (BMI) calculator. Check your BMI score, WHO weight category, and healthy weight range for your height.",
-    url: 'https://studenttools.cyou/calculators/bmi',
+    title: "BMI Calculator 2025 (Body Mass Index, WHO Categories & Healthy Weight Range) | StudentTools",
+    description: "Free BMI calculator 2025. Check your Body Mass Index score, WHO weight category, Asian-Indian thresholds, and healthy weight range for your height.",
+    url: 'https://www.studenttools.cyou/calculators/bmi',
     siteName: 'StudentTools',
     type: 'website',
   },

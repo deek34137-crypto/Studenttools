@@ -48,7 +48,7 @@ Add these to your production environment (e.g. Vercel Project Settings) or `.env
 
 ```bash
 # --- Core Platform ---
-NEXT_PUBLIC_SITE_URL=https://studenttools.cyou
+NEXT_PUBLIC_SITE_URL=https://www.studenttools.cyou
 
 # --- Gemini API ---
 GEMINI_API_KEY=your_gemini_api_key_here

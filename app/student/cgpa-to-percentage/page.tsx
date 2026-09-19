@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "CGPA to Percentage Calculator 2025-26 (Official CBSE 9.5x, VTU & Mumbai Univ Formula) | StudentTools",
   description: "Free CBSE CGPA to percentage converter 2025-26. Convert 10-point CGPA using official 9.5x CBSE, VTU, and Mumbai University conversion formulas.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/cgpa-to-percentage',
+    canonical: 'https://www.studenttools.cyou/student/cgpa-to-percentage',
   },
   openGraph: {
     title: "CGPA to Percentage Calculator 2025-26 (Official CBSE 9.5x, VTU & Mumbai Univ Formula) | StudentTools",
     description: "Free CBSE CGPA to percentage converter 2025-26. Convert 10-point CGPA using official 9.5x CBSE, VTU, and Mumbai University conversion formulas.",
-    url: 'https://studenttools.cyou/student/cgpa-to-percentage',
+    url: 'https://www.studenttools.cyou/student/cgpa-to-percentage',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -185,7 +185,7 @@ Return ONLY the valid JSON object.
           headers: {
             Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://studenttools.cyou',
+            'HTTP-Referer': 'https://www.studenttools.cyou',
             'X-Title': 'StudentTools Editorial Engine',
           },
           body: JSON.stringify({

@@ -9,15 +9,15 @@ const ROUTE = '/career/ctc-to-in-hand'
 const TOOL_ID = 'career-ctc-to-in-hand'
 
 export const metadata: Metadata = {
-  title: "CTC to In-Hand Salary Calculator (Monthly Take-Home Breakdown India) | StudentTools",
-  description: "Estimate your monthly take-home salary from your annual CTC in India. Detailed breakdown of Basic, HRA, Employee PF, PT, and TDS tax deductions.",
+  title: "CTC to In-Hand Salary Calculator FY 2025-26 (Monthly Take-Home Breakdown India) | StudentTools",
+  description: "Estimate your FY 2025-26 monthly take-home salary from annual CTC in India. Detailed breakdown of Basic, HRA, Employee PF, PT, and new regime TDS deductions.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/ctc-to-in-hand',
+    canonical: 'https://www.studenttools.cyou/career/ctc-to-in-hand',
   },
   openGraph: {
-    title: "CTC to In-Hand Salary Calculator (Monthly Take-Home Breakdown India) | StudentTools",
-    description: "Estimate your monthly take-home salary from your annual CTC in India. Detailed breakdown of Basic, HRA, Employee PF, PT, and TDS tax deductions.",
-    url: 'https://studenttools.cyou/career/ctc-to-in-hand',
+    title: "CTC to In-Hand Salary Calculator FY 2025-26 (Monthly Take-Home Breakdown India) | StudentTools",
+    description: "Estimate your FY 2025-26 monthly take-home salary from annual CTC in India. Detailed breakdown of Basic, HRA, Employee PF, PT, and new regime TDS deductions.",
+    url: 'https://www.studenttools.cyou/career/ctc-to-in-hand',
     siteName: 'StudentTools',
     type: 'website',
   },

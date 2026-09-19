@@ -9,15 +9,15 @@ const ROUTE = '/calculators/ratio'
 const TOOL_ID = 'calculators-ratio'
 
 export const metadata: Metadata = {
-  title: "Ratio Calculator (Ratio Simplification to Lowest Terms & Scaling) | StudentTools",
-  description: "Simplify mathematical ratios to their simplest form using GCD. Find equivalent ratios, decimal equivalents, and percentage values.",
+  title: "Ratio Calculator 2025 (Simplify to Lowest Terms, Decimal & Percentage) | StudentTools",
+  description: "Simplify any ratio to lowest terms using GCD in 2025. Find equivalent ratios, decimal equivalents, and percentage representation with steps.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/ratio',
+    canonical: 'https://www.studenttools.cyou/calculators/ratio',
   },
   openGraph: {
-    title: "Ratio Calculator (Ratio Simplification to Lowest Terms & Scaling) | StudentTools",
-    description: "Simplify mathematical ratios to their simplest form using GCD. Find equivalent ratios, decimal equivalents, and percentage values.",
-    url: 'https://studenttools.cyou/calculators/ratio',
+    title: "Ratio Calculator 2025 (Simplify to Lowest Terms, Decimal & Percentage) | StudentTools",
+    description: "Simplify any ratio to lowest terms using GCD in 2025. Find equivalent ratios, decimal equivalents, and percentage representation with steps.",
+    url: 'https://www.studenttools.cyou/calculators/ratio',
     siteName: 'StudentTools',
     type: 'website',
   },

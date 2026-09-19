@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Free Indian personal finance calculators: reducing balance loan EMI schedule, mutual fund SIP wealth projector, GST split calculator, FD/RD interest, and Income Tax estimator.',
   alternates: {
-    canonical: 'https://studenttools.cyou/finance',
+    canonical: 'https://www.studenttools.cyou/finance',
   },
 }
 

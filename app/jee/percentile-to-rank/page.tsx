@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Main Percentile to Rank Estimator 2025-26 (CRL & Category Rank) | StudentTools",
   description: "Convert your JEE Main 2025-26 NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/percentile-to-rank',
+    canonical: 'https://www.studenttools.cyou/jee/percentile-to-rank',
   },
   openGraph: {
     title: "JEE Main Percentile to Rank Estimator 2025-26 (CRL & Category Rank) | StudentTools",
     description: "Convert your JEE Main 2025-26 NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
-    url: 'https://studenttools.cyou/jee/percentile-to-rank',
+    url: 'https://www.studenttools.cyou/jee/percentile-to-rank',
     siteName: 'StudentTools',
     type: 'website',
   },

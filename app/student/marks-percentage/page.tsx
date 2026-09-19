@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Marks Percentage Calculator 2025-26 (CBSE, ICSE & State Board) | StudentTools",
   description: "Calculate total percentage and average score across any number of subjects in 2025-26. Perfect for CBSE, ICSE, and state board marksheets.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/marks-percentage',
+    canonical: 'https://www.studenttools.cyou/student/marks-percentage',
   },
   openGraph: {
     title: "Marks Percentage Calculator 2025-26 (CBSE, ICSE & State Board) | StudentTools",
     description: "Calculate total percentage and average score across any number of subjects in 2025-26. Perfect for CBSE, ICSE, and state board marksheets.",
-    url: 'https://studenttools.cyou/student/marks-percentage',
+    url: 'https://www.studenttools.cyou/student/marks-percentage',
     siteName: 'StudentTools',
     type: 'website',
   },

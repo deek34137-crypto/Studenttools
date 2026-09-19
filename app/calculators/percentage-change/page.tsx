@@ -9,15 +9,15 @@ const ROUTE = '/calculators/percentage-change'
 const TOOL_ID = 'calculators-percentage-change'
 
 export const metadata: Metadata = {
-  title: "Percentage Increase / Decrease Calculator (Step-by-Step Change) | StudentTools",
-  description: "Calculate the percentage change between an initial and final value. Shows clear step-by-step formula and explains increase vs decrease.",
+  title: "Percentage Increase / Decrease Calculator 2025 (Step-by-Step Change) | StudentTools",
+  description: "Calculate percentage increase or decrease between any two values in 2025 with clear step-by-step formula and increase/decrease direction indicator.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/percentage-change',
+    canonical: 'https://www.studenttools.cyou/calculators/percentage-change',
   },
   openGraph: {
-    title: "Percentage Increase / Decrease Calculator (Step-by-Step Change) | StudentTools",
-    description: "Calculate the percentage change between an initial and final value. Shows clear step-by-step formula and explains increase vs decrease.",
-    url: 'https://studenttools.cyou/calculators/percentage-change',
+    title: "Percentage Increase / Decrease Calculator 2025 (Step-by-Step Change) | StudentTools",
+    description: "Calculate percentage increase or decrease between any two values in 2025 with clear step-by-step formula and increase/decrease direction indicator.",
+    url: 'https://www.studenttools.cyou/calculators/percentage-change',
     siteName: 'StudentTools',
     type: 'website',
   },

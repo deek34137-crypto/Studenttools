@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Study Hours Calculator 2025-26 (Exam Revision Time Budget & Planner) | StudentTools",
   description: "Plan your 2025-26 exam preparation. Calculate available study hours and allocate revision time across high, medium, and low priority subjects.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/study-hours',
+    canonical: 'https://www.studenttools.cyou/student/study-hours',
   },
   openGraph: {
     title: "Study Hours Calculator 2025-26 (Exam Revision Time Budget & Planner) | StudentTools",
     description: "Plan your 2025-26 exam preparation. Calculate available study hours and allocate revision time across high, medium, and low priority subjects.",
-    url: 'https://studenttools.cyou/student/study-hours',
+    url: 'https://www.studenttools.cyou/student/study-hours',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Free JEE Main marks to percentile estimator, percentile to rank predictor, JoSAA cutoff explorer, marks calculator, and session countdown timer.',
   alternates: {
-    canonical: 'https://studenttools.cyou/jee',
+    canonical: 'https://www.studenttools.cyou/jee',
   },
 }
 

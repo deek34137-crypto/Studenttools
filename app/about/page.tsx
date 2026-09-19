@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Learn about StudentTools.cyou, our commitment to 100% free educational tools, transparent calculation methodologies, and student privacy.',
   alternates: {
-    canonical: 'https://studenttools.cyou/about',
+    canonical: 'https://www.studenttools.cyou/about',
   },
 }
 

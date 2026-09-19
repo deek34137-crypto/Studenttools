@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Average Marks Calculator 2025 (Simple & Weighted Mean Score) | StudentTools",
   description: "Easily calculate simple and weighted average marks across subjects, quizzes, and test evaluations in 2025 with clear step-by-step breakdown.",
   alternates: {
-    canonical: 'https://studenttools.cyou/student/average-marks',
+    canonical: 'https://www.studenttools.cyou/student/average-marks',
   },
   openGraph: {
     title: "Average Marks Calculator 2025 (Simple & Weighted Mean Score) | StudentTools",
     description: "Easily calculate simple and weighted average marks across subjects, quizzes, and test evaluations in 2025 with clear step-by-step breakdown.",
-    url: 'https://studenttools.cyou/student/average-marks',
+    url: 'https://www.studenttools.cyou/student/average-marks',
     siteName: 'StudentTools',
     type: 'website',
   },

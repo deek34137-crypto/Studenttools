@@ -9,15 +9,15 @@ const ROUTE = '/career/pf-calculator'
 const TOOL_ID = 'career-pf-calculator'
 
 export const metadata: Metadata = {
-  title: "PF Calculator (EPF & EPS Monthly Contribution & Interest) | StudentTools",
-  description: "Calculate monthly Employee and Employer Provident Fund (EPF/EPS) contributions and project long-term compound wealth at EPFO interest rates.",
+  title: "PF Calculator FY 2025-26 (EPF & EPS Monthly Contribution & Interest) | StudentTools",
+  description: "Calculate FY 2025-26 monthly Employee and Employer Provident Fund (EPF/EPS) contributions and project long-term compound wealth at EPFO interest rates.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/pf-calculator',
+    canonical: 'https://www.studenttools.cyou/career/pf-calculator',
   },
   openGraph: {
-    title: "PF Calculator (EPF & EPS Monthly Contribution & Interest) | StudentTools",
-    description: "Calculate monthly Employee and Employer Provident Fund (EPF/EPS) contributions and project long-term compound wealth at EPFO interest rates.",
-    url: 'https://studenttools.cyou/career/pf-calculator',
+    title: "PF Calculator FY 2025-26 (EPF & EPS Monthly Contribution & Interest) | StudentTools",
+    description: "Calculate FY 2025-26 monthly Employee and Employer Provident Fund (EPF/EPS) contributions and project long-term compound wealth at EPFO interest rates.",
+    url: 'https://www.studenttools.cyou/career/pf-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

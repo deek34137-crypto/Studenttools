@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Free academic calculators: CGPA to percentage, 75% attendance tracker, weighted semester GPA, marks percentage aggregator, and required exam score calculator.',
   alternates: {
-    canonical: 'https://studenttools.cyou/student',
+    canonical: 'https://www.studenttools.cyou/student',
   },
 }
 

@@ -9,15 +9,15 @@ const ROUTE = '/career/bonus-calculator'
 const TOOL_ID = 'career-bonus-calculator'
 
 export const metadata: Metadata = {
-  title: "Bonus Calculator (Performance & Annual Incentive After TDS) | StudentTools",
-  description: "Calculate gross bonus based on percentage of salary or fixed payout and estimate the net in-hand bonus after TDS deductions.",
+  title: "Bonus Calculator FY 2025-26 (Performance & Annual Incentive After TDS) | StudentTools",
+  description: "Calculate your FY 2025-26 gross bonus from percentage of salary or fixed payout and estimate net in-hand bonus after TDS deductions.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/bonus-calculator',
+    canonical: 'https://www.studenttools.cyou/career/bonus-calculator',
   },
   openGraph: {
-    title: "Bonus Calculator (Performance & Annual Incentive After TDS) | StudentTools",
-    description: "Calculate gross bonus based on percentage of salary or fixed payout and estimate the net in-hand bonus after TDS deductions.",
-    url: 'https://studenttools.cyou/career/bonus-calculator',
+    title: "Bonus Calculator FY 2025-26 (Performance & Annual Incentive After TDS) | StudentTools",
+    description: "Calculate your FY 2025-26 gross bonus from percentage of salary or fixed payout and estimate net in-hand bonus after TDS deductions.",
+    url: 'https://www.studenttools.cyou/career/bonus-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

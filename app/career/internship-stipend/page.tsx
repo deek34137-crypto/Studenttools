@@ -9,15 +9,15 @@ const ROUTE = '/career/internship-stipend'
 const TOOL_ID = 'career-internship-stipend'
 
 export const metadata: Metadata = {
-  title: "Internship Stipend Calculator (Hourly, Weekly & Monthly Intern Pay) | StudentTools",
-  description: "Calculate your total expected internship earnings based on monthly, weekly, or hourly compensation and working schedules.",
+  title: "Internship Stipend Calculator 2025-26 (Hourly, Weekly & Monthly Intern Pay) | StudentTools",
+  description: "Calculate your 2025-26 total internship earnings based on monthly, weekly, or hourly compensation and working schedule.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/internship-stipend',
+    canonical: 'https://www.studenttools.cyou/career/internship-stipend',
   },
   openGraph: {
-    title: "Internship Stipend Calculator (Hourly, Weekly & Monthly Intern Pay) | StudentTools",
-    description: "Calculate your total expected internship earnings based on monthly, weekly, or hourly compensation and working schedules.",
-    url: 'https://studenttools.cyou/career/internship-stipend',
+    title: "Internship Stipend Calculator 2025-26 (Hourly, Weekly & Monthly Intern Pay) | StudentTools",
+    description: "Calculate your 2025-26 total internship earnings based on monthly, weekly, or hourly compensation and working schedule.",
+    url: 'https://www.studenttools.cyou/career/internship-stipend',
     siteName: 'StudentTools',
     type: 'website',
   },

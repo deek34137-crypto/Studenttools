@@ -58,7 +58,7 @@ export function CalculatorLayout({
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: tool.title,
-    url: `https://studenttools.cyou${tool.route}`,
+    url: `https://www.studenttools.cyou${tool.route}`,
     description: tool.description,
     applicationCategory: 'EducationalApplication',
     operatingSystem: 'Any',

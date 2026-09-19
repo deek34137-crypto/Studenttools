@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Main Cutoff Explorer 2025-26 (JoSAA Opening & Closing Ranks) | StudentTools",
   description: "Explore 2025-26 opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/cutoff',
+    canonical: 'https://www.studenttools.cyou/jee/cutoff',
   },
   openGraph: {
     title: "JEE Main Cutoff Explorer 2025-26 (JoSAA Opening & Closing Ranks) | StudentTools",
     description: "Explore 2025-26 opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
-    url: 'https://studenttools.cyou/jee/cutoff',
+    url: 'https://www.studenttools.cyou/jee/cutoff',
     siteName: 'StudentTools',
     type: 'website',
   },

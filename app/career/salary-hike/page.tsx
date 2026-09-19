@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "Salary Hike Calculator 2025-26 (Appraisal & Job Switch Increment) | StudentTools",
   description: "Calculate your revised annual CTC and monthly salary after receiving a percentage hike during appraisals or job switches.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/salary-hike',
+    canonical: 'https://www.studenttools.cyou/career/salary-hike',
   },
   openGraph: {
     title: "Salary Hike Calculator 2025-26 (Appraisal & Job Switch Increment) | StudentTools",
     description: "Calculate your revised annual CTC and monthly salary after receiving a percentage hike during appraisals or job switches.",
-    url: 'https://studenttools.cyou/career/salary-hike',
+    url: 'https://www.studenttools.cyou/career/salary-hike',
     siteName: 'StudentTools',
     type: 'website',
   },

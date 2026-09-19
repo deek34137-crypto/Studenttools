@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "EMI Calculator 2025-26 (Loan EMI, Total Interest & Amortization Schedule) | StudentTools",
   description: "Calculate monthly loan EMI using reducing balance method. View total interest, total payment, and detailed 2025-26 yearly amortization schedule.",
   alternates: {
-    canonical: 'https://studenttools.cyou/finance/emi-calculator',
+    canonical: 'https://www.studenttools.cyou/finance/emi-calculator',
   },
   openGraph: {
     title: "EMI Calculator 2025-26 (Loan EMI, Total Interest & Amortization Schedule) | StudentTools",
     description: "Calculate monthly loan EMI using reducing balance method. View total interest, total payment, and detailed 2025-26 yearly amortization schedule.",
-    url: 'https://studenttools.cyou/finance/emi-calculator',
+    url: 'https://www.studenttools.cyou/finance/emi-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

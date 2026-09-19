@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     // 5. Generate Article Record
     const contentHash = computeContentHash(title, content)
     const publishedAt = new Date().toISOString()
-    const articleUrl = `https://studenttools.cyou/blog/${cleanSlug}`
+    const articleUrl = `https://www.studenttools.cyou/blog/${cleanSlug}`
 
     const secKeywordsList = Array.isArray(secondaryKeywords)
       ? secondaryKeywords

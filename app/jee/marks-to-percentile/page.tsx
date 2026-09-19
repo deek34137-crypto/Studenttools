@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Main Marks to Percentile Estimator 2025-26 (Shift-Wise Normalization) | StudentTools",
   description: "Estimate your JEE Main 2025-26 percentile from total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/marks-to-percentile',
+    canonical: 'https://www.studenttools.cyou/jee/marks-to-percentile',
   },
   openGraph: {
     title: "JEE Main Marks to Percentile Estimator 2025-26 (Shift-Wise Normalization) | StudentTools",
     description: "Estimate your JEE Main 2025-26 percentile from total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
-    url: 'https://studenttools.cyou/jee/marks-to-percentile',
+    url: 'https://www.studenttools.cyou/jee/marks-to-percentile',
     siteName: 'StudentTools',
     type: 'website',
   },

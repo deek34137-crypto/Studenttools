@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   title: "JEE Main College Predictor 2025-26 (NITs, IIITs & GFTIs by JoSAA Cutoffs) | StudentTools",
   description: "Find NIT, IIIT, and GFTI admission chances for your JEE Main 2025-26 rank based on official JoSAA counselling closing ranks.",
   alternates: {
-    canonical: 'https://studenttools.cyou/jee/college-predictor',
+    canonical: 'https://www.studenttools.cyou/jee/college-predictor',
   },
   openGraph: {
     title: "JEE Main College Predictor 2025-26 (NITs, IIITs & GFTIs by JoSAA Cutoffs) | StudentTools",
     description: "Find NIT, IIIT, and GFTI admission chances for your JEE Main 2025-26 rank based on official JoSAA counselling closing ranks.",
-    url: 'https://studenttools.cyou/jee/college-predictor',
+    url: 'https://www.studenttools.cyou/jee/college-predictor',
     siteName: 'StudentTools',
     type: 'website',
   },

@@ -9,15 +9,15 @@ const ROUTE = '/calculators/scientific-calculator'
 const TOOL_ID = 'calculators-scientific-calculator'
 
 export const metadata: Metadata = {
-  title: "Scientific Calculator Online (Trig, Log, Powers & Roots) | StudentTools",
-  description: "Fast, responsive online scientific calculator. Supports sine, cosine, tangent, log, ln, square roots, powers, parentheses, and angle modes.",
+  title: "Scientific Calculator Online 2025 (Trig, Log, Powers, Roots & Safe Parser) | StudentTools",
+  description: "Fast online scientific calculator 2025. Supports sine, cosine, tangent, log, ln, square roots, powers, parentheses, and DEG/RAD angle modes with safe expression parser.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/scientific-calculator',
+    canonical: 'https://www.studenttools.cyou/calculators/scientific-calculator',
   },
   openGraph: {
-    title: "Scientific Calculator Online (Trig, Log, Powers & Roots) | StudentTools",
-    description: "Fast, responsive online scientific calculator. Supports sine, cosine, tangent, log, ln, square roots, powers, parentheses, and angle modes.",
-    url: 'https://studenttools.cyou/calculators/scientific-calculator',
+    title: "Scientific Calculator Online 2025 (Trig, Log, Powers, Roots & Safe Parser) | StudentTools",
+    description: "Fast online scientific calculator 2025. Supports sine, cosine, tangent, log, ln, square roots, powers, parentheses, and DEG/RAD angle modes with safe expression parser.",
+    url: 'https://www.studenttools.cyou/calculators/scientific-calculator',
     siteName: 'StudentTools',
     type: 'website',
   },

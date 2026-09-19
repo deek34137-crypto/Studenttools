@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Privacy policy for StudentTools.cyou. Learn how calculations are performed client-side and how cookies and analytics are handled.',
   alternates: {
-    canonical: 'https://studenttools.cyou/privacy',
+    canonical: 'https://www.studenttools.cyou/privacy',
   },
 }
 
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
         <section className="space-y-2">
           <h2 className="text-lg font-bold text-slate-900">1. Client-Side Calculation Guarantee</h2>
           <p>
-            At <strong>StudentTools</strong> (accessible at <code className="text-sky-600 font-mono">https://studenttools.cyou</code>), user privacy and transparency are core design principles.
+            At <strong>StudentTools</strong> (accessible at <code className="text-sky-600 font-mono">https://www.studenttools.cyou</code>), user privacy and transparency are core design principles.
           </p>
           <p>
             The mathematical calculations performed on our calculators—including but not limited to JEE Main marks, CGPA scores, attendance percentages, monthly CTC salary numbers, and loan amounts—are processed <strong>locally within your web browser</strong> using client-side JavaScript. Your individual numeric inputs are not transmitted to or stored on our servers.

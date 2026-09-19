@@ -9,15 +9,15 @@ const ROUTE = '/career/annual-to-monthly-salary'
 const TOOL_ID = 'career-annual-to-monthly-salary'
 
 export const metadata: Metadata = {
-  title: "Annual to Monthly Salary Calculator (LPA to Monthly Gross) | StudentTools",
-  description: "Convert annual CTC package in Lakhs Per Annum (LPA) into monthly gross paycheck, weekly income, and daily rates.",
+  title: "Annual to Monthly Salary Calculator 2025-26 (LPA to Monthly Gross) | StudentTools",
+  description: "Convert your 2025-26 annual CTC in Lakhs Per Annum (LPA) into monthly gross paycheck, weekly income, and daily rates.",
   alternates: {
-    canonical: 'https://studenttools.cyou/career/annual-to-monthly-salary',
+    canonical: 'https://www.studenttools.cyou/career/annual-to-monthly-salary',
   },
   openGraph: {
-    title: "Annual to Monthly Salary Calculator (LPA to Monthly Gross) | StudentTools",
-    description: "Convert annual CTC package in Lakhs Per Annum (LPA) into monthly gross paycheck, weekly income, and daily rates.",
-    url: 'https://studenttools.cyou/career/annual-to-monthly-salary',
+    title: "Annual to Monthly Salary Calculator 2025-26 (LPA to Monthly Gross) | StudentTools",
+    description: "Convert your 2025-26 annual CTC in Lakhs Per Annum (LPA) into monthly gross paycheck, weekly income, and daily rates.",
+    url: 'https://www.studenttools.cyou/career/annual-to-monthly-salary',
     siteName: 'StudentTools',
     type: 'website',
   },

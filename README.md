@@ -2,7 +2,7 @@
 
 A fast, mobile-first, client-side platform providing free calculators, educational tools, JEE/exam tools, career/salary tools, finance calculators, and everyday utilities for Indian students, competitive exam aspirants, and working professionals.
 
-🌐 **Production Domain:** [https://studenttools.cyou](https://studenttools.cyou)
+🌐 **Production Domain:** [https://www.studenttools.cyou](https://www.studenttools.cyou)
 
 ---
 

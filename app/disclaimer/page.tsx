@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Comprehensive legal, financial, academic, and health disclaimers for tools and calculators on StudentTools.cyou.',
   alternates: {
-    canonical: 'https://studenttools.cyou/disclaimer',
+    canonical: 'https://www.studenttools.cyou/disclaimer',
   },
 }
 

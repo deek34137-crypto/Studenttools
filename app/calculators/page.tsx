@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     'Free online general calculators: scientific calculator, chronological age calculator, metric & imperial BMI, unit converter, date difference, shopping discount, and fraction simplifier.',
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators',
+    canonical: 'https://www.studenttools.cyou/calculators',
   },
 }
 

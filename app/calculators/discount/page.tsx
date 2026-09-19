@@ -9,15 +9,15 @@ const ROUTE = '/calculators/discount'
 const TOOL_ID = 'calculators-discount'
 
 export const metadata: Metadata = {
-  title: "Discount Calculator (Sale Price & Savings Amount) | StudentTools",
-  description: "Calculate final sale prices and total money saved from percentage discounts. Simple, fast shopping discount calculator.",
+  title: "Discount Calculator 2025 (Sale Price & Total Savings from Percentage Off) | StudentTools",
+  description: "Calculate final sale price and total money saved from any percentage discount in 2025. Simple, fast, and accurate shopping discount calculator.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/discount',
+    canonical: 'https://www.studenttools.cyou/calculators/discount',
   },
   openGraph: {
-    title: "Discount Calculator (Sale Price & Savings Amount) | StudentTools",
-    description: "Calculate final sale prices and total money saved from percentage discounts. Simple, fast shopping discount calculator.",
-    url: 'https://studenttools.cyou/calculators/discount',
+    title: "Discount Calculator 2025 (Sale Price & Total Savings from Percentage Off) | StudentTools",
+    description: "Calculate final sale price and total money saved from any percentage discount in 2025. Simple, fast, and accurate shopping discount calculator.",
+    url: 'https://www.studenttools.cyou/calculators/discount',
     siteName: 'StudentTools',
     type: 'website',
   },

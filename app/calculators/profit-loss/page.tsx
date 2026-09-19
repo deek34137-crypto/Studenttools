@@ -9,15 +9,15 @@ const ROUTE = '/calculators/profit-loss'
 const TOOL_ID = 'calculators-profit-loss'
 
 export const metadata: Metadata = {
-  title: "Profit and Loss Calculator (Cost Price vs Selling Price Margin) | StudentTools",
-  description: "Determine profit or loss amount and percentage from Cost Price (CP) and Selling Price (SP) with clear mathematical formulas.",
+  title: "Profit & Loss Calculator 2025 (Cost Price vs Selling Price Margin & Percentage) | StudentTools",
+  description: "Determine profit or loss amount and percentage from Cost Price (CP) and Selling Price (SP) in 2025 with clear step-by-step formulas.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/profit-loss',
+    canonical: 'https://www.studenttools.cyou/calculators/profit-loss',
   },
   openGraph: {
-    title: "Profit and Loss Calculator (Cost Price vs Selling Price Margin) | StudentTools",
-    description: "Determine profit or loss amount and percentage from Cost Price (CP) and Selling Price (SP) with clear mathematical formulas.",
-    url: 'https://studenttools.cyou/calculators/profit-loss',
+    title: "Profit & Loss Calculator 2025 (Cost Price vs Selling Price Margin & Percentage) | StudentTools",
+    description: "Determine profit or loss amount and percentage from Cost Price (CP) and Selling Price (SP) in 2025 with clear step-by-step formulas.",
+    url: 'https://www.studenttools.cyou/calculators/profit-loss',
     siteName: 'StudentTools',
     type: 'website',
   },

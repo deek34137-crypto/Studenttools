@@ -20,7 +20,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.label,
-      item: item.href ? `https://studenttools.cyou${item.href}` : undefined,
+      item: item.href ? `https://www.studenttools.cyou${item.href}` : undefined,
     })),
   }
 

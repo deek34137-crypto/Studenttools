@@ -9,15 +9,15 @@ const ROUTE = '/calculators/age'
 const TOOL_ID = 'calculators-age'
 
 export const metadata: Metadata = {
-  title: "Age Calculator (Exact Age in Years, Months, Days & Next Birthday) | StudentTools",
-  description: "Calculate your exact chronological age in years, months, days, and total days lived. Find out the day of the week you were born and next birthday countdown.",
+  title: "Age Calculator 2025 (Exact Age in Years, Months, Days & Next Birthday) | StudentTools",
+  description: "Calculate your exact age in 2025 — years, months, days, total days lived, the day you were born, and your next birthday countdown.",
   alternates: {
-    canonical: 'https://studenttools.cyou/calculators/age',
+    canonical: 'https://www.studenttools.cyou/calculators/age',
   },
   openGraph: {
-    title: "Age Calculator (Exact Age in Years, Months, Days & Next Birthday) | StudentTools",
-    description: "Calculate your exact chronological age in years, months, days, and total days lived. Find out the day of the week you were born and next birthday countdown.",
-    url: 'https://studenttools.cyou/calculators/age',
+    title: "Age Calculator 2025 (Exact Age in Years, Months, Days & Next Birthday) | StudentTools",
+    description: "Calculate your exact age in 2025 — years, months, days, total days lived, the day you were born, and your next birthday countdown.",
+    url: 'https://www.studenttools.cyou/calculators/age',
     siteName: 'StudentTools',
     type: 'website',
   },
