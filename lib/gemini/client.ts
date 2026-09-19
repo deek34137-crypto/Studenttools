@@ -43,15 +43,48 @@ export const ArticleGenerationSchema = z.object({
 
 export type ArticleGeneratedData = z.infer<typeof ArticleGenerationSchema>
 
+function parseAndValidateArticle(
+  rawText: string
+): { success: true; data: ArticleGeneratedData } | { success: false; error: string; rawResponse?: string } {
+  let cleaned = rawText.trim()
+  if (cleaned.startsWith('```json')) {
+    cleaned = cleaned.replace(/^```json\s*/, '').replace(/\s*```$/, '')
+  } else if (cleaned.startsWith('```')) {
+    cleaned = cleaned.replace(/^```\s*/, '').replace(/\s*```$/, '')
+  }
+
+  let parsedJson: unknown
+  try {
+    parsedJson = JSON.parse(cleaned)
+  } catch (parseErr: any) {
+    return {
+      success: false,
+      error: `JSON parse error: ${parseErr.message}`,
+      rawResponse: rawText.slice(0, 500),
+    }
+  }
+
+  const zodResult = ArticleGenerationSchema.safeParse(parsedJson)
+  if (!zodResult.success) {
+    return {
+      success: false,
+      error: `Zod validation error: ${zodResult.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join(', ')}`,
+      rawResponse: cleaned.slice(0, 500),
+    }
+  }
+
+  return { success: true, data: zodResult.data }
+}
+
 export async function generateArticleWithGemini(
   topic: TopicRow
 ): Promise<{ success: true; data: ArticleGeneratedData } | { success: false; error: string; rawResponse?: string }> {
-  const apiKey = process.env.GEMINI_API_KEY
+  const apiKey = process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY
   if (!apiKey) {
-    return { success: false, error: 'GEMINI_API_KEY is not configured in environment variables.' }
+    return { success: false, error: 'GEMINI_API_KEY or OPENROUTER_API_KEY is not configured in environment variables.' }
   }
 
-  const modelName = process.env.GEMINI_MODEL || 'gemini-3.7-flash'
+  const isOpenRouter = apiKey.startsWith('sk-or-') || Boolean(process.env.OPENROUTER_API_KEY)
 
   // Retrieve relevant calculator metadata if available
   const tool = topic.related_tool_slug ? getToolByRoute(topic.related_tool_slug) : undefined
@@ -128,6 +161,73 @@ OUTPUT JSON SCHEMA:
 Return ONLY the valid JSON object.
 `
 
+  // 1. OPENROUTER PROVIDER ROUTE
+  if (isOpenRouter) {
+    const openRouterModels = Array.from(
+      new Set(
+        [
+          process.env.OPENROUTER_MODEL,
+          'google/gemini-2.5-flash',
+          'google/gemini-flash-1.5',
+          'meta-llama/llama-3.3-70b-instruct',
+          'deepseek/deepseek-chat',
+        ].filter(Boolean) as string[]
+      )
+    )
+
+    let rawText = ''
+    let lastError: any = null
+
+    for (const modelCandidate of openRouterModels) {
+      try {
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://studenttools.cyou',
+            'X-Title': 'StudentTools Editorial Engine',
+          },
+          body: JSON.stringify({
+            model: modelCandidate,
+            messages: [
+              { role: 'system', content: systemInstruction },
+              { role: 'user', content: prompt },
+            ],
+            max_tokens: 3800,
+            temperature: 0.3,
+            response_format: { type: 'json_object' },
+          }),
+        })
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}))
+          throw new Error(`OpenRouter (${res.status}): ${errData?.error?.message || res.statusText}`)
+        }
+
+        const data = await res.json()
+        rawText = data.choices?.[0]?.message?.content || ''
+        if (rawText) {
+          lastError = null
+          break
+        }
+      } catch (err: any) {
+        lastError = err
+        console.warn(`OpenRouter model ${modelCandidate} failed: ${err.message}. Trying next candidate...`)
+      }
+    }
+
+    if (lastError || !rawText) {
+      return {
+        success: false,
+        error: `AI API execution error: ${lastError?.message || 'No response from model'}`,
+      }
+    }
+
+    return parseAndValidateArticle(rawText)
+  }
+
+  // 2. GOOGLE GEMINI NATIVE PROVIDER ROUTE
   try {
     const candidateModels = Array.from(
       new Set(
@@ -138,14 +238,13 @@ Return ONLY the valid JSON object.
           'gemini-1.5-flash',
           'gemini-1.5-flash-latest',
           'gemini-flash-latest',
-          'gemini-2.5-pro',
+          'gemini-3.1-pro-preview',
         ].filter(Boolean) as string[]
       )
     )
 
     let lastError: any = null
     let rawText = ''
-    let usedModel = ''
 
     for (const modelCandidate of candidateModels) {
       try {
@@ -163,55 +262,25 @@ Return ONLY the valid JSON object.
         rawText = response.response.text()
         if (rawText) {
           lastError = null
-          usedModel = modelCandidate
           break
         }
       } catch (err: any) {
         lastError = err
         console.warn(`Gemini model ${modelCandidate} failed with: ${err.message}. Trying next candidate...`)
-        // If 503 high demand or 429 rate limit, short delay before fallback
         if (err?.message?.includes('503') || err?.message?.includes('429')) {
           await new Promise((resolve) => setTimeout(resolve, 800))
         }
       }
     }
 
-  if (lastError || !rawText) {
-    return {
-      success: false,
-      error: `Gemini API execution error: ${lastError?.message || 'No response from model'}`,
-    }
-  }
-
-    // Clean JSON text if wrapped in markdown blocks
-    let cleaned = rawText.trim()
-    if (cleaned.startsWith('```json')) {
-      cleaned = cleaned.replace(/^```json\s*/, '').replace(/\s*```$/, '')
-    } else if (cleaned.startsWith('```')) {
-      cleaned = cleaned.replace(/^```\s*/, '').replace(/\s*```$/, '')
-    }
-
-    let parsedJson: unknown
-    try {
-      parsedJson = JSON.parse(cleaned)
-    } catch (parseErr: any) {
+    if (lastError || !rawText) {
       return {
         success: false,
-        error: `JSON parse error: ${parseErr.message}`,
-        rawResponse: rawText.slice(0, 500),
+        error: `Gemini API execution error: ${lastError?.message || 'No response from model'}`,
       }
     }
 
-    const zodResult = ArticleGenerationSchema.safeParse(parsedJson)
-    if (!zodResult.success) {
-      return {
-        success: false,
-        error: `Zod validation error: ${zodResult.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join(', ')}`,
-        rawResponse: cleaned.slice(0, 500),
-      }
-    }
-
-    return { success: true, data: zodResult.data }
+    return parseAndValidateArticle(rawText)
   } catch (err: any) {
     return {
       success: false,
