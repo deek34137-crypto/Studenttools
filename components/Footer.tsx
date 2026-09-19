@@ -102,6 +102,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
+                <Link href="/blog" className="hover:text-white transition-colors text-sky-400 font-medium">
+                  Educational Guides
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-white transition-colors">
                   About StudentTools
                 </Link>

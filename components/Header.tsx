@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: 'Career & Salary', href: '/career' },
   { label: 'Finance', href: '/finance' },
   { label: 'Calculators', href: '/calculators' },
+  { label: 'Guides', href: '/blog' },
 ]
 
 export function Header() {
