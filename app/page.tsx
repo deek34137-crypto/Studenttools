@@ -1,9 +1,6 @@
-'use client'
-
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import {
-  TOOLS,
   getPopularTools,
   getToolsByCategory,
   CATEGORY_DEFINITIONS,
@@ -11,25 +8,19 @@ import {
 } from '../data/tools'
 import { ToolCard } from '../components/ToolCard'
 import { AdPlaceholder } from '../components/AdPlaceholder'
-import { GlobalSearch } from '../components/GlobalSearch'
+import { HeroSearchTrigger } from '../components/HeroSearchTrigger'
+import { HomeFaqAccordion } from '../components/HomeFaqAccordion'
 import {
-  Search,
   Sparkles,
   Zap,
   ShieldCheck,
   Smartphone,
   ChevronRight,
   GraduationCap,
-  Calculator,
-  ChevronDown,
 } from 'lucide-react'
 
 export default function HomePage() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [openFaq, setOpenFaq] = useState<number | null>(0)
-
   const popularTools = getPopularTools()
-
   const categories: ToolCategory[] = ['jee', 'student', 'career', 'finance', 'calculators']
 
   const homeFaqs = [
@@ -79,20 +70,7 @@ export default function HomePage() {
           </p>
 
           {/* Search Trigger Button */}
-          <div className="mt-8 max-w-md mx-auto">
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="w-full flex items-center justify-between px-4 py-3 bg-white hover:bg-slate-50 border border-slate-300 hover:border-sky-400 rounded-2xl shadow-sm text-sm text-slate-500 transition-all group"
-            >
-              <div className="flex items-center gap-2.5">
-                <Search className="w-5 h-5 text-slate-400 group-hover:text-sky-600 transition-colors" />
-                <span>Search for a calculator (e.g. JEE, salary, EMI)...</span>
-              </div>
-              <kbd className="hidden sm:inline-block text-xs font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
-                Ctrl K
-              </kbd>
-            </button>
-          </div>
+          <HeroSearchTrigger />
 
           {/* Quick Shortcuts */}
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
@@ -239,38 +217,12 @@ export default function HomePage() {
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
             Frequently Asked Questions
           </h2>
-          <div className="divide-y divide-slate-100">
-            {homeFaqs.map((faq, index) => {
-              const isOpen = openFaq === index
-              return (
-                <div key={index} className="py-4 first:pt-0 last:pb-0">
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : index)}
-                    className="w-full flex items-center justify-between text-left font-semibold text-slate-900 hover:text-sky-600 text-sm sm:text-base py-1"
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${
-                        isOpen ? 'rotate-180 text-sky-600' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed pl-1 animate-fadeIn">
-                      {faq.a}
-                    </p>
-                  )}
-                </div>
-              )
-            })}
-          </div>
+          <HomeFaqAccordion faqs={homeFaqs} />
         </section>
 
         {/* Bottom Ad */}
         <AdPlaceholder slot="bottom-content" />
       </div>
-
-      <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   )
 }

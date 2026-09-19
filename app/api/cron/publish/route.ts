@@ -1,39 +1,29 @@
 // app/api/cron/publish/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { executeDailyPublishPipeline } from '@/lib/publisher/pipeline'
+import { getNextReadyTopic, getTopicQueueStats } from '@/lib/sheets/topicQueue'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
-  // 1. Verify Vercel Cron or Authorization Header
-  const cronSecret = process.env.CRON_SECRET
-  const authHeader = request.headers.get('authorization')
-  const vercelCronHeader = request.headers.get('x-vercel-cron')
-
-  // In production, CRON_SECRET is required to prevent unauthorized triggers
-  if (cronSecret) {
-    const isAuthorized =
-      authHeader === `Bearer ${cronSecret}` ||
-      request.nextUrl.searchParams.get('key') === cronSecret ||
-      Boolean(vercelCronHeader)
-
-    if (!isAuthorized) {
-      return NextResponse.json(
-        { error: 'Unauthorized: Invalid or missing cron secret.' },
-        { status: 401 }
-      )
-    }
-  }
-
+  // Automated AI writer is permanently disabled in favor of the manual editorial workflow.
+  // This endpoint now reports the current queue status and next topic in line.
   try {
-    const result = await executeDailyPublishPipeline()
-    return NextResponse.json(result)
+    const nextTopic = await getNextReadyTopic()
+    const stats = await getTopicQueueStats()
+
+    return NextResponse.json({
+      status: 'MANUAL_EDITORIAL_MODE',
+      message: 'Automated AI writer is disabled. Manual editorial queue workflow is active.',
+      nextTopicId: nextTopic?.topic_id || null,
+      nextTopicTitle: nextTopic?.topic || null,
+      stats: {
+        total: stats.total,
+        published: stats.published,
+        ready: stats.ready,
+      },
+    })
   } catch (err: any) {
-    console.error('Unhandled Cron Publish error:', err)
-    return NextResponse.json(
-      { error: err.message || 'Internal pipeline error', action: 'FAILED' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
 

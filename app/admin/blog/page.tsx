@@ -4,13 +4,14 @@ import { isAuthenticatedAdmin } from '@/lib/admin/auth'
 import { AdminLoginForm } from '@/components/admin/AdminLoginForm'
 import { AdminDashboard } from '@/components/admin/AdminDashboard'
 import { getTopicQueueStats, getNextReadyTopic } from '@/lib/sheets/topicQueue'
-import { getTodayPublishCount, getGenerationLogs } from '@/lib/db/articles'
+import { getTodayPublishCount, listPublishedArticles } from '@/lib/db/articles'
 import { getOperationalDateKey } from '@/lib/publisher/pipeline'
+import { TOOLS } from '@/data/tools'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Blog Editorial Dashboard | StudentTools Admin',
+  title: 'Blog Editorial Workstation | StudentTools Admin',
   robots: { index: false, follow: false },
 }
 
@@ -38,7 +39,7 @@ export default async function AdminBlogPage() {
   }
   let nextTopic = null
   let todayCount = 0
-  let recentLogs: any[] = []
+  let publishedList: any[] = []
   let loadWarning: string | null = null
 
   try {
@@ -46,7 +47,7 @@ export default async function AdminBlogPage() {
       getTopicQueueStats(),
       getNextReadyTopic(),
       getTodayPublishCount(dateKey),
-      getGenerationLogs(15),
+      listPublishedArticles({ limit: 10 }),
     ])
 
     if (results[0].status === 'fulfilled') {
@@ -69,17 +70,21 @@ export default async function AdminBlogPage() {
     }
 
     if (results[3].status === 'fulfilled') {
-      recentLogs = results[3].value
+      publishedList = results[3].value.articles || []
     } else {
-      console.error('Failed to load recent logs:', results[3].reason)
+      console.error('Failed to load published articles:', results[3].reason)
     }
   } catch (err: any) {
     console.error('Unexpected error loading admin dashboard data:', err)
     loadWarning = err?.message || 'Some data could not be retrieved from the backend.'
   }
 
-  const dailyLimit = parseInt(process.env.BLOG_DAILY_LIMIT || '1', 10)
-  const autopublishEnabled = process.env.BLOG_AUTOPUBLISH_ENABLED === 'true'
+  const availableTools = TOOLS.map((t) => ({
+    title: t.title,
+    route: t.route,
+    category: t.category,
+    categoryName: t.categoryName,
+  }))
 
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
@@ -90,16 +95,16 @@ export default async function AdminBlogPage() {
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  StudentTools Editorial System
+                  StudentTools Editorial Workstation
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-                Automated Blog Publishing Dashboard
+                Blog Topics Queue & Editorial Studio
               </h1>
             </div>
             <div className="text-xs text-slate-500 text-right">
-              <div>Timezone: <strong className="text-slate-800">{process.env.BLOG_TIMEZONE || 'Asia/Kolkata'}</strong></div>
-              <div>Model: <strong className="text-slate-800">{process.env.GEMINI_MODEL || 'gemini-2.5-flash'}</strong></div>
+              <div>Editorial Mode: <strong className="text-emerald-700">Manual / ChatGPT Assistant</strong></div>
+              <div>Workflow: <strong className="text-slate-800">Sequential Topic Queue</strong></div>
             </div>
           </div>
         </div>
@@ -115,10 +120,9 @@ export default async function AdminBlogPage() {
           initialStats={stats}
           nextTopic={nextTopic}
           todayCount={todayCount}
-          dailyLimit={dailyLimit}
           dateKey={dateKey}
-          recentLogs={recentLogs}
-          autopublishEnabled={autopublishEnabled}
+          publishedArticles={publishedList}
+          availableTools={availableTools}
         />
       </div>
     </div>

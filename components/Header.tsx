@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { Search, Menu, X, Calculator, GraduationCap, ChevronRight } from 'lucide-react'
-import { GlobalSearch } from './GlobalSearch'
+
+const GlobalSearch = dynamic(() => import('./GlobalSearch').then((mod) => mod.GlobalSearch), {
+  ssr: false,
+})
 
 const NAV_LINKS = [
   { label: 'JEE & Exams', href: '/jee' },
@@ -20,7 +24,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  // Global Ctrl+K / Cmd+K listener
+  // Global Ctrl+K / Cmd+K listener and custom event listener
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -28,14 +32,22 @@ export function Header() {
         setIsSearchOpen((prev) => !prev)
       }
     }
+    function handleOpenSearch() {
+      setIsSearchOpen(true)
+    }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener('open-global-search', handleOpenSearch)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('open-global-search', handleOpenSearch)
+    }
   }, [])
 
   // Close mobile drawer on route change
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
+
 
   return (
     <>
@@ -143,8 +155,9 @@ export function Header() {
         )}
       </header>
 
-      {/* Global Search Modal */}
-      <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      {/* Global Search Modal (lazy loaded) */}
+      {isSearchOpen && <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />}
     </>
   )
 }
+

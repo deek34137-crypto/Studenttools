@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getArticleBySlug } from '@/lib/db/articles'
+import { getArticleBySlug, getAllPublishedSlugs } from '@/lib/db/articles'
 import { getToolByRoute } from '@/data/tools'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { MarkdownContent } from '@/components/MarkdownContent'
@@ -26,7 +26,13 @@ interface ArticlePageProps {
   }
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
+
+export async function generateStaticParams() {
+  const slugs = await getAllPublishedSlugs()
+  return slugs.map((s) => ({ slug: s.slug }))
+}
+
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const article = await getArticleBySlug(params.slug)

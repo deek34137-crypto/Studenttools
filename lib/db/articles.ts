@@ -18,6 +18,43 @@ const LOCKS_FILE = path.join(STORAGE_DIR, 'publishing_locks.json')
 // In-memory fallback if disk is completely read-only or unavailable
 const memoryCache: Record<string, unknown> = {}
 
+// High-performance query cache with 5-minute TTL to prevent repeated DB roundtrips
+interface CacheEntry<T> {
+  data: T
+  timestamp: number
+}
+const queryCache = new Map<string, CacheEntry<unknown>>()
+const CACHE_TTL_MS = 5 * 60 * 1000 // 5 minutes
+
+function getCached<T>(key: string): T | null {
+  const entry = queryCache.get(key)
+  if (!entry) return null
+  if (Date.now() - entry.timestamp > CACHE_TTL_MS) {
+    queryCache.delete(key)
+    return null
+  }
+  return entry.data as T
+}
+
+function setCached<T>(key: string, data: T) {
+  queryCache.set(key, { data, timestamp: Date.now() })
+}
+
+async function withTimeout<T = any>(promise: Promise<T> | any, timeoutMs = 1200): Promise<T> {
+  let timer: NodeJS.Timeout
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error('DB_TIMEOUT')), timeoutMs)
+  })
+  try {
+    const result = await Promise.race([promise, timeoutPromise])
+    clearTimeout(timer!)
+    return result
+  } catch (err) {
+    clearTimeout(timer!)
+    throw err
+  }
+}
+
 function ensureStorage() {
   try {
     if (!fs.existsSync(STORAGE_DIR)) {
@@ -71,27 +108,43 @@ function getAllStoredArticles(): ArticleRecord[] {
 }
 
 export async function getArticleBySlug(slug: string): Promise<ArticleRecord | null> {
+  const cacheKey = `article:${slug}`
+  const cached = getCached<ArticleRecord>(cacheKey)
+  if (cached) return cached
+
   const supabase = getSupabase()
 
   if (supabase) {
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .eq('slug', slug)
-      .eq('status', 'PUBLISHED')
-      .maybeSingle()
+    try {
+      const { data, error } = await withTimeout(
+        supabase
+          .from('articles')
+          .select('*')
+          .eq('slug', slug)
+          .eq('status', 'PUBLISHED')
+          .maybeSingle() as any,
+        1200
+      )
 
-    if (error) {
-      console.error('Supabase getArticleBySlug error:', error)
-    } else if (data) {
-      return data as ArticleRecord
+      if (!error && data) {
+        const record = data as ArticleRecord
+        setCached(cacheKey, record)
+        return record
+      }
+    } catch (err) {
+      // Supabase timeout or error - proceed to fast local fallback
     }
   }
 
   // Fallback to stored articles
   const articles = getAllStoredArticles()
-  return articles.find((a) => a.slug === slug && a.status === 'PUBLISHED') || null
+  const found = articles.find((a) => a.slug === slug && a.status === 'PUBLISHED') || null
+  if (found) {
+    setCached(cacheKey, found)
+  }
+  return found
 }
+
 
 export async function listPublishedArticles(options?: {
   page?: number
@@ -101,40 +154,49 @@ export async function listPublishedArticles(options?: {
 }): Promise<{ articles: ArticleRecord[]; total: number; page: number; totalPages: number }> {
   const page = Math.max(1, options?.page || 1)
   const limit = Math.max(1, Math.min(50, options?.limit || 12))
-  const category = options?.category?.toLowerCase()
-  const search = options?.search?.toLowerCase().trim()
+  const category = options?.category?.toLowerCase() || 'all'
+  const search = options?.search?.toLowerCase().trim() || ''
+
+  const cacheKey = `list:${page}:${limit}:${category}:${search}`
+  const cached = getCached<{ articles: ArticleRecord[]; total: number; page: number; totalPages: number }>(cacheKey)
+  if (cached) return cached
 
   const supabase = getSupabase()
 
   if (supabase) {
-    let query = supabase
-      .from('articles')
-      .select('*', { count: 'exact' })
-      .eq('status', 'PUBLISHED')
-      .order('published_at', { ascending: false })
+    try {
+      let query = supabase
+        .from('articles')
+        .select('*', { count: 'exact' })
+        .eq('status', 'PUBLISHED')
+        .order('published_at', { ascending: false })
 
-    if (category && category !== 'all') {
-      query = query.ilike('category', `%${category}%`)
-    }
-
-    if (search) {
-      query = query.or(`title.ilike.%${search}%,excerpt.ilike.%${search}%,primary_keyword.ilike.%${search}%`)
-    }
-
-    const from = (page - 1) * limit
-    const to = from + limit - 1
-    const { data, count, error } = await query.range(from, to)
-
-    if (!error && data && data.length > 0) {
-      const total = count || 0
-      return {
-        articles: data as ArticleRecord[],
-        total,
-        page,
-        totalPages: Math.ceil(total / limit) || 1,
+      if (category && category !== 'all') {
+        query = query.ilike('category', `%${category}%`)
       }
+
+      if (search) {
+        query = query.or(`title.ilike.%${search}%,excerpt.ilike.%${search}%,primary_keyword.ilike.%${search}%`)
+      }
+
+      const from = (page - 1) * limit
+      const to = from + limit - 1
+      const { data, count, error } = await withTimeout(query.range(from, to) as any, 1200)
+
+      if (!error && data && data.length > 0) {
+        const total = count || 0
+        const res = {
+          articles: data as ArticleRecord[],
+          total,
+          page,
+          totalPages: Math.ceil(total / limit) || 1,
+        }
+        setCached(cacheKey, res)
+        return res
+      }
+    } catch (err) {
+      // Supabase timeout or error - fast fallback to local
     }
-    console.error('Supabase listPublishedArticles error, falling back to local:', error)
   }
 
   // Stored articles fallback
@@ -160,33 +222,50 @@ export async function listPublishedArticles(options?: {
   const startIndex = (page - 1) * limit
   const paginated = all.slice(startIndex, startIndex + limit)
 
-  return {
+  const res = {
     articles: paginated,
     total,
     page,
     totalPages: Math.ceil(total / limit) || 1,
   }
+  setCached(cacheKey, res)
+  return res
 }
 
 export async function getAllPublishedSlugs(): Promise<{ slug: string; published_at: string }[]> {
+  const cacheKey = 'all_published_slugs'
+  const cached = getCached<{ slug: string; published_at: string }[]>(cacheKey)
+  if (cached) return cached
+
   const supabase = getSupabase()
 
   if (supabase) {
-    const { data, error } = await supabase
-      .from('articles')
-      .select('slug, published_at')
-      .eq('status', 'PUBLISHED')
-      .order('published_at', { ascending: false })
+    try {
+      const { data, error } = await withTimeout(
+        supabase
+          .from('articles')
+          .select('slug, published_at')
+          .eq('status', 'PUBLISHED')
+          .order('published_at', { ascending: false }) as any,
+        1200
+      )
 
-    if (!error && data) {
-      return data as { slug: string; published_at: string }[]
+      if (!error && data && data.length > 0) {
+        const result = data as { slug: string; published_at: string }[]
+        setCached(cacheKey, result)
+        return result
+      }
+    } catch (err) {
+      // Fallback on timeout
     }
   }
 
   const articles = getAllStoredArticles()
-  return articles
+  const result = articles
     .filter((a) => a.status === 'PUBLISHED')
     .map((a) => ({ slug: a.slug, published_at: a.published_at }))
+  setCached(cacheKey, result)
+  return result
 }
 
 export async function getArticlesByRelatedTool(
@@ -194,23 +273,36 @@ export async function getArticlesByRelatedTool(
   limit: number = 4
 ): Promise<ArticleRecord[]> {
   const normalizedSlug = toolSlug.startsWith('/') ? toolSlug : `/${toolSlug}`
+  const cacheKey = `tool_articles:${normalizedSlug}:${limit}`
+  const cached = getCached<ArticleRecord[]>(cacheKey)
+  if (cached) return cached
+
   const supabase = getSupabase()
 
   if (supabase) {
-    const { data, error } = await supabase
-      .from('articles')
-      .select('*')
-      .eq('status', 'PUBLISHED')
-      .contains('related_tools', [{ route: normalizedSlug }])
-      .limit(limit)
+    try {
+      const { data, error } = await withTimeout(
+        supabase
+          .from('articles')
+          .select('*')
+          .eq('status', 'PUBLISHED')
+          .contains('related_tools', [{ route: normalizedSlug }])
+          .limit(limit) as any,
+        1200
+      )
 
-    if (!error && data && data.length > 0) {
-      return data as ArticleRecord[]
+      if (!error && data && data.length > 0) {
+        const result = data as ArticleRecord[]
+        setCached(cacheKey, result)
+        return result
+      }
+    } catch (err) {
+      // Fallback on timeout
     }
   }
 
   const articles = getAllStoredArticles()
-  return articles
+  const result = articles
     .filter(
       (a) =>
         a.status === 'PUBLISHED' &&
@@ -218,6 +310,8 @@ export async function getArticlesByRelatedTool(
         a.related_tools.some((t) => t.route === normalizedSlug)
     )
     .slice(0, limit)
+  setCached(cacheKey, result)
+  return result
 }
 
 export async function saveArticle(article: ArticleRecord): Promise<boolean> {

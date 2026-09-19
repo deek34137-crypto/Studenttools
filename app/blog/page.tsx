@@ -5,7 +5,8 @@ import { listPublishedArticles } from '@/lib/db/articles'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { BookOpen, Calendar, Clock, ArrowRight, Calculator, Search, Tag } from 'lucide-react'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
+
 
 export const metadata: Metadata = {
   title: 'Educational Guides, Formula Walkthroughs & Student Advice | StudentTools Blog',

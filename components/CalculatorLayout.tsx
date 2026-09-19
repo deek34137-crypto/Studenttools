@@ -1,17 +1,14 @@
-'use client'
-
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Breadcrumbs, BreadcrumbItem } from './Breadcrumbs'
 import { ToolMetadata, getRelatedTools } from '../data/tools'
 import { ToolCard } from './ToolCard'
 import { AdPlaceholder } from './AdPlaceholder'
-import { ChevronDown, HelpCircle, Info, Calculator, CheckCircle2, AlertTriangle, BookOpen, ArrowRight } from 'lucide-react'
+import { CalculatorFaqAccordion, FaqItem } from './CalculatorFaqAccordion'
+import { HelpCircle, Info, Calculator, CheckCircle2, AlertTriangle, BookOpen, ArrowRight } from 'lucide-react'
 
-export interface FaqItem {
-  question: string
-  answer: string
-}
+export type { FaqItem }
+
 
 export interface RelatedArticleItem {
   title: string
@@ -53,8 +50,8 @@ export function CalculatorLayout({
   faqs = [],
   relatedArticles = [],
 }: CalculatorLayoutProps) {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0)
   const relatedTools = getRelatedTools(tool.id, 4)
+
 
   // WebApplication JSON-LD Schema
   const webAppSchema = {
@@ -225,34 +222,10 @@ export function CalculatorLayout({
               <HelpCircle className="w-5 h-5 text-sky-600" />
               <h2 className="text-lg sm:text-xl font-bold">Frequently Asked Questions</h2>
             </div>
-            <div className="divide-y divide-slate-100">
-              {faqs.map((faq, index) => {
-                const isOpen = openFaqIndex === index
-                return (
-                  <div key={index} className="py-3.5 first:pt-0 last:pb-0">
-                    <button
-                      onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                      className="w-full flex items-center justify-between gap-4 text-left font-semibold text-slate-900 hover:text-sky-600 transition-colors text-sm sm:text-base py-1"
-                      aria-expanded={isOpen}
-                    >
-                      <span>{faq.question}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                          isOpen ? 'rotate-180 text-sky-600' : ''
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed pl-1 animate-fadeIn">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
+            <CalculatorFaqAccordion faqs={faqs} />
           </section>
         )}
+
 
         {/* Related Tools */}
         {relatedTools.length > 0 && (
