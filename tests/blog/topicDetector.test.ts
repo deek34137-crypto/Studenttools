@@ -27,11 +27,12 @@ describe('Topic & Plagiarism Duplication Detector', () => {
   })
 
   it('should pass a fresh, unique topic from the queue', async () => {
+    // Use a completely unpublished topic unrelated to any existing articles
     const result = await detectDuplicates({
-      title: 'How to Calculate Raw Score from JEE Main Response Sheet',
-      slug: 'how-to-calculate-raw-score-from-jee-main-response-sheet',
-      primaryKeyword: 'how to calculate jee main raw score',
-      content: `## How to Check Response Sheet\nDownload your response sheet from the NTA portal.\n\n## Calculate Total Marks\nAdd +4 for each correct answer and deduct 1 for wrong.`,
+      title: 'How to Convert CGPA to Percentage in Anna University Grading System',
+      slug: 'cgpa-to-percentage-anna-university-grading-system',
+      primaryKeyword: 'anna university cgpa to percentage conversion',
+      content: `## Anna University CGPA Scale\nAnna University uses a 10-point grading scale for undergraduate engineering programmes.\n\n## Conversion Formula\nMultiply CGPA by 10 to obtain the approximate percentage equivalent.`,
     })
 
     expect(result.isDuplicate).toBe(false)

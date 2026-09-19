@@ -33,11 +33,11 @@
     "content_angle": "Step-by-step guide to downloading NTA response sheet, cross-referencing provisional answer keys, tracking bonus questions, and tallying marks accurately.",
     "evergreen": "YES",
     "priority": "HIGH",
-    "status": "READY",
-    "published_url": "",
-    "published_at": "",
+    "status": "PUBLISHED",
+    "published_url": "https://www.studenttools.cyou/blog/how-to-calculate-jee-main-raw-score-response-sheet",
+    "published_at": "2026-09-19T08:50:14.824Z",
     "error": "",
-    "content_hash": ""
+    "content_hash": "hash_st002_v1"
   },
   {
     "topic_id": "ST003",
