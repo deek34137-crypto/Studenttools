@@ -1,34 +1,54 @@
 // lib/sheets/topicQueue.ts
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
 import crypto from 'crypto'
 import * as xlsx from 'xlsx'
 import { TopicRow, TopicStatus } from '../db/types'
 
-const EXCEL_FILE = path.resolve(process.cwd(), 'StudentTools_1105_Blog_Topics_Database.xlsx')
 const SHEET_NAME = process.env.GOOGLE_SHEETS_WORKSHEET_NAME || 'Topics'
 
-// In-memory/local override cache so local test updates persist across runs during development
-const LOCAL_STATE_FILE = path.resolve(process.cwd(), 'data/storage/topic_overrides.json')
+function getExcelFilePath(): string | null {
+  const candidates = [
+    path.resolve(process.cwd(), 'StudentTools_1105_Blog_Topics_Database.xlsx'),
+    path.resolve(process.cwd(), 'data/StudentTools_1105_Blog_Topics_Database.xlsx'),
+    path.join(__dirname, '../../StudentTools_1105_Blog_Topics_Database.xlsx'),
+    path.join(__dirname, '../StudentTools_1105_Blog_Topics_Database.xlsx'),
+  ]
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate
+  }
+  return null
+}
+
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+const LOCAL_STATE_FILE = isServerless
+  ? path.join(os.tmpdir(), 'studenttools_storage', 'topic_overrides.json')
+  : path.resolve(process.cwd(), 'data/storage/topic_overrides.json')
+
+let memoryOverrides: Record<string, Partial<TopicRow>> = {}
 
 function getLocalOverrides(): Record<string, Partial<TopicRow>> {
   try {
     if (fs.existsSync(LOCAL_STATE_FILE)) {
-      return JSON.parse(fs.readFileSync(LOCAL_STATE_FILE, 'utf-8'))
+      const data = JSON.parse(fs.readFileSync(LOCAL_STATE_FILE, 'utf-8'))
+      memoryOverrides = { ...memoryOverrides, ...data }
+      return memoryOverrides
     }
   } catch (err) {
-    console.error('Error reading local topic overrides:', err)
+    // Ignore read failure and use memory overrides
   }
-  return {}
+  return memoryOverrides
 }
 
 function saveLocalOverrides(overrides: Record<string, Partial<TopicRow>>) {
+  memoryOverrides = { ...memoryOverrides, ...overrides }
   try {
     const dir = path.dirname(LOCAL_STATE_FILE)
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     fs.writeFileSync(LOCAL_STATE_FILE, JSON.stringify(overrides, null, 2), 'utf-8')
   } catch (err) {
-    console.error('Error saving local topic overrides:', err)
+    // Ignore write failure in read-only environment
   }
 }
 
@@ -155,37 +175,44 @@ export async function getAllTopics(): Promise<TopicRow[]> {
   }
 
   // Local Excel Fallback
-  if (fs.existsSync(EXCEL_FILE)) {
-    const wb = xlsx.readFile(EXCEL_FILE)
-    const sheet = wb.Sheets[SHEET_NAME] || wb.Sheets[wb.SheetNames[0]]
-    const rawData = xlsx.utils.sheet_to_json<Record<string, unknown>>(sheet)
-    const overrides = getLocalOverrides()
+  const excelPath = getExcelFilePath()
+  if (excelPath && fs.existsSync(excelPath)) {
+    try {
+      const wb = xlsx.readFile(excelPath)
+      const sheet = wb.Sheets[SHEET_NAME] || wb.Sheets[wb.SheetNames[0]]
+      if (sheet) {
+        const rawData = xlsx.utils.sheet_to_json<Record<string, unknown>>(sheet)
+        const overrides = getLocalOverrides()
 
-    return rawData.map((row, idx) => {
-      const topicId = String(row.topic_id || `ST_${idx + 1}`)
-      const override = overrides[topicId] || {}
+        return rawData.map((row, idx) => {
+          const topicId = String(row.topic_id || `ST_${idx + 1}`)
+          const override = overrides[topicId] || {}
 
-      return {
-        topic_id: topicId,
-        topic: String(row.topic || ''),
-        category: String(row.category || 'General'),
-        topic_cluster: String(row.topic_cluster || ''),
-        article_type: String(row.article_type || 'Explanation'),
-        search_intent: String(row.search_intent || 'Educational'),
-        primary_keyword: String(row.primary_keyword || ''),
-        secondary_keywords: String(row.secondary_keywords || ''),
-        related_tool: String(row.related_tool || ''),
-        related_tool_slug: String(row.related_tool_slug || ''),
-        content_angle: String(row.content_angle || ''),
-        evergreen: String(row.evergreen || 'YES'),
-        priority: (String(row.priority || 'MEDIUM').toUpperCase() as 'HIGH' | 'MEDIUM' | 'LOW'),
-        status: (override.status || String(row.status || 'READY').toUpperCase()) as TopicStatus,
-        published_url: override.published_url !== undefined ? override.published_url : (row.published_url as string) || null,
-        published_at: override.published_at !== undefined ? override.published_at : (row.published_at as string) || null,
-        error: override.error !== undefined ? override.error : (row.error as string) || null,
-        content_hash: override.content_hash !== undefined ? override.content_hash : (row.content_hash as string) || null,
+          return {
+            topic_id: topicId,
+            topic: String(row.topic || ''),
+            category: String(row.category || 'General'),
+            topic_cluster: String(row.topic_cluster || ''),
+            article_type: String(row.article_type || 'Explanation'),
+            search_intent: String(row.search_intent || 'Educational'),
+            primary_keyword: String(row.primary_keyword || ''),
+            secondary_keywords: String(row.secondary_keywords || ''),
+            related_tool: String(row.related_tool || ''),
+            related_tool_slug: String(row.related_tool_slug || ''),
+            content_angle: String(row.content_angle || ''),
+            evergreen: String(row.evergreen || 'YES'),
+            priority: (override.priority || row.priority || 'MEDIUM') as any,
+            status: (override.status || row.status || 'READY').toString().toUpperCase() as TopicStatus,
+            published_url: override.published_url !== undefined ? override.published_url : (row.published_url ? String(row.published_url) : null),
+            published_at: override.published_at !== undefined ? override.published_at : (row.published_at ? String(row.published_at) : null),
+            error: override.error !== undefined ? override.error : (row.error ? String(row.error) : null),
+            content_hash: override.content_hash !== undefined ? override.content_hash : (row.content_hash ? String(row.content_hash) : null),
+          }
+        })
       }
-    })
+    } catch (err) {
+      console.error('Error reading local Excel fallback:', err)
+    }
   }
 
   return []

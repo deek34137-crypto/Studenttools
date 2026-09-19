@@ -50,10 +50,15 @@ export function verifyAdminSessionToken(token: string): boolean {
 }
 
 export function isAuthenticatedAdmin(): boolean {
-  const cookieStore = cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
-  if (!token) return false
-  return verifyAdminSessionToken(token)
+  try {
+    const cookieStore = cookies()
+    const token = cookieStore.get(COOKIE_NAME)?.value
+    if (!token) return false
+    return verifyAdminSessionToken(token)
+  } catch (err) {
+    console.error('Error reading admin session cookie:', err)
+    return false
+  }
 }
 
 export function getAdminSessionCookieConfig(secret: string) {

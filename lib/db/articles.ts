@@ -1,42 +1,57 @@
 // lib/db/articles.ts
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
 import { getSupabase, isSupabaseConfigured } from './supabase'
 import { ArticleRecord, GenerationLogRecord, PublishingLockRecord } from './types'
 
-const STORAGE_DIR = path.resolve(process.cwd(), 'data/storage')
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+const STORAGE_DIR = isServerless
+  ? path.join(os.tmpdir(), 'studenttools_storage')
+  : path.resolve(process.cwd(), 'data/storage')
+
 const ARTICLES_FILE = path.join(STORAGE_DIR, 'articles.json')
 const LOGS_FILE = path.join(STORAGE_DIR, 'generation_logs.json')
 const LOCKS_FILE = path.join(STORAGE_DIR, 'publishing_locks.json')
 
-// Helper for local file fallback storage
+// In-memory fallback if disk is completely read-only or unavailable
+const memoryCache: Record<string, unknown> = {}
+
 function ensureStorage() {
-  if (!fs.existsSync(STORAGE_DIR)) {
-    fs.mkdirSync(STORAGE_DIR, { recursive: true })
+  try {
+    if (!fs.existsSync(STORAGE_DIR)) {
+      fs.mkdirSync(STORAGE_DIR, { recursive: true })
+    }
+  } catch (err) {
+    // Ignore directory creation failure on strict read-only environments
   }
 }
 
 function readLocalJson<T>(filePath: string, fallback: T): T {
   try {
+    if (memoryCache[filePath] !== undefined) {
+      return memoryCache[filePath] as T
+    }
     ensureStorage()
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, JSON.stringify(fallback, null, 2), 'utf-8')
       return fallback
     }
     const raw = fs.readFileSync(filePath, 'utf-8')
-    return JSON.parse(raw) as T
+    const parsed = JSON.parse(raw) as T
+    memoryCache[filePath] = parsed
+    return parsed
   } catch (err) {
-    console.error(`Error reading local storage ${filePath}:`, err)
-    return fallback
+    return (memoryCache[filePath] as T) ?? fallback
   }
 }
 
 function writeLocalJson<T>(filePath: string, data: T) {
+  memoryCache[filePath] = data
   try {
     ensureStorage()
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8')
   } catch (err) {
-    console.error(`Error writing local storage ${filePath}:`, err)
+    // Memory cache holds the state even if disk write fails
   }
 }
 
