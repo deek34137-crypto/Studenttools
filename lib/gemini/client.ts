@@ -128,6 +128,7 @@ OUTPUT JSON SCHEMA:
 Return ONLY the valid JSON object.
 `
 
+  try {
     const candidateModels = Array.from(
       new Set(
         [
