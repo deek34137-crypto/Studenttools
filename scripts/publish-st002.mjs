@@ -264,7 +264,7 @@ const topics = JSON.parse(fs.readFileSync('data/topicsDatabase.json', 'utf8'))
 const topicIndex = topics.findIndex(t => t.topic_id === 'ST002')
 if (topicIndex !== -1) {
   topics[topicIndex].status = 'PUBLISHED'
-  topics[topicIndex].published_url = 'https://www.studenttools.cyou/blog/how-to-calculate-jee-main-raw-score-response-sheet'
+  topics[topicIndex].published_url = 'https://studenttools.cyou/blog/how-to-calculate-jee-main-raw-score-response-sheet'
   topics[topicIndex].published_at = newArticle.published_at
   topics[topicIndex].content_hash = newArticle.content_hash
   fs.writeFileSync('data/topicsDatabase.json', JSON.stringify(topics, null, 2), 'utf8')
