@@ -72,7 +72,10 @@ export function AdminDashboard({
       const data = await res.json()
       setLastResult(data)
 
-      if (data.success) {
+      if (data.action === 'SKIPPED') {
+        setStatusType('info')
+        setStatusMessage(`Pipeline Skipped: ${data.reason || 'No action required.'}`)
+      } else if (data.success) {
         setStatusType('success')
         setStatusMessage(
           dryRun

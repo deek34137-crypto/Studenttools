@@ -5,6 +5,7 @@ import os from 'os'
 import crypto from 'crypto'
 import * as xlsx from 'xlsx'
 import { TopicRow, TopicStatus } from '../db/types'
+import fallbackTopicsData from '@/data/topicsDatabase.json'
 
 const SHEET_NAME = process.env.GOOGLE_SHEETS_WORKSHEET_NAME || 'Topics'
 
@@ -213,6 +214,37 @@ export async function getAllTopics(): Promise<TopicRow[]> {
     } catch (err) {
       console.error('Error reading local Excel fallback:', err)
     }
+  }
+
+  // Bundled 1,105 Topics Database Fallback (Guaranteed to always be present in serverless bundle)
+  const rawTopics = Array.isArray(fallbackTopicsData) && fallbackTopicsData.length > 0 ? fallbackTopicsData : []
+  if (rawTopics.length > 0) {
+    const overrides = getLocalOverrides()
+    return (rawTopics as Record<string, unknown>[]).map((row, idx) => {
+      const topicId = String(row.topic_id || `ST_${idx + 1}`)
+      const override = overrides[topicId] || {}
+
+      return {
+        topic_id: topicId,
+        topic: String(row.topic || ''),
+        category: String(row.category || 'General'),
+        topic_cluster: String(row.topic_cluster || ''),
+        article_type: String(row.article_type || 'Explanation'),
+        search_intent: String(row.search_intent || 'Educational'),
+        primary_keyword: String(row.primary_keyword || ''),
+        secondary_keywords: String(row.secondary_keywords || ''),
+        related_tool: String(row.related_tool || ''),
+        related_tool_slug: String(row.related_tool_slug || ''),
+        content_angle: String(row.content_angle || ''),
+        evergreen: String(row.evergreen || 'YES'),
+        priority: (override.priority || row.priority || 'MEDIUM') as any,
+        status: (override.status || row.status || 'READY').toString().toUpperCase() as TopicStatus,
+        published_url: override.published_url !== undefined ? override.published_url : (row.published_url ? String(row.published_url) : null),
+        published_at: override.published_at !== undefined ? override.published_at : (row.published_at ? String(row.published_at) : null),
+        error: override.error !== undefined ? override.error : (row.error ? String(row.error) : null),
+        content_hash: override.content_hash !== undefined ? override.content_hash : (row.content_hash ? String(row.content_hash) : null),
+      }
+    })
   }
 
   return []
