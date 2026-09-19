@@ -9,14 +9,14 @@ const ROUTE = '/student/percentage-calculator'
 const TOOL_ID = 'student-percentage-calculator'
 
 export const metadata: Metadata = {
-  title: "Percentage Calculator (X of Y, Increase, Decrease & Difference) | StudentTools",
-  description: "Calculate percentages instantly. Features X of Y, percentage increase, decrease, difference, with step-by-step mathematical breakdown.",
+  title: "Percentage Calculator 2025 (X of Y, Increase, Decrease & Difference) | StudentTools",
+  description: "Calculate percentages instantly in 2025. Features X of Y, percentage increase, percentage decrease, and difference with step-by-step breakdown.",
   alternates: {
     canonical: 'https://studenttools.cyou/student/percentage-calculator',
   },
   openGraph: {
-    title: "Percentage Calculator (X of Y, Increase, Decrease & Difference) | StudentTools",
-    description: "Calculate percentages instantly. Features X of Y, percentage increase, decrease, difference, with step-by-step mathematical breakdown.",
+    title: "Percentage Calculator 2025 (X of Y, Increase, Decrease & Difference) | StudentTools",
+    description: "Calculate percentages instantly in 2025. Features X of Y, percentage increase, percentage decrease, and difference with step-by-step breakdown.",
     url: 'https://studenttools.cyou/student/percentage-calculator',
     siteName: 'StudentTools',
     type: 'website',

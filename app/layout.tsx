@@ -14,7 +14,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://studenttools.cyou'),
   title: {
     default: 'StudentTools — Free Calculators for Students, Exams, Careers & Finance',
     template: '%s | StudentTools',
@@ -49,17 +49,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    url: 'https://www.studenttools.cyou',
+    url: 'https://studenttools.cyou',
     siteName: 'StudentTools',
     title: 'StudentTools — Fast, Free Calculators for Students & Professionals',
     description:
       'Free educational utilities, JEE marks to percentile, CGPA conversion, attendance tracking, Indian salary take-home breakdown, and everyday calculators.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'StudentTools — Free Calculators for Indian Students & Professionals',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'StudentTools — Free Calculators for Students & Professionals',
     description:
       'Fast, mobile-first educational and everyday utility tools for Indian students and professionals.',
+    images: ['/og-image.png'],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,

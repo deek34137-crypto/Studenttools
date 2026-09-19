@@ -9,14 +9,14 @@ const ROUTE = '/jee/cutoff'
 const TOOL_ID = 'jee-cutoff'
 
 export const metadata: Metadata = {
-  title: "JEE Main Cutoff Explorer (JoSAA Opening & Closing Ranks) | StudentTools",
-  description: "Explore opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
+  title: "JEE Main Cutoff Explorer 2025-26 (JoSAA Opening & Closing Ranks) | StudentTools",
+  description: "Explore 2025-26 opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
   alternates: {
     canonical: 'https://studenttools.cyou/jee/cutoff',
   },
   openGraph: {
-    title: "JEE Main Cutoff Explorer (JoSAA Opening & Closing Ranks) | StudentTools",
-    description: "Explore opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
+    title: "JEE Main Cutoff Explorer 2025-26 (JoSAA Opening & Closing Ranks) | StudentTools",
+    description: "Explore 2025-26 opening and closing ranks for premier engineering colleges in India across categories, home state, and other state quotas.",
     url: 'https://studenttools.cyou/jee/cutoff',
     siteName: 'StudentTools',
     type: 'website',

@@ -9,13 +9,13 @@ const ROUTE = '/finance/tax-calculator'
 const TOOL_ID = 'finance-tax-calculator'
 
 export const metadata: Metadata = {
-  title: "Income Tax Calculator India (New vs Old Regime FY 2024-25 & 2025-26) | StudentTools",
+  title: "Income Tax Calculator India FY 2025-26 (New vs Old Regime, Section 87A & Cess) | StudentTools",
   description: "Calculate Indian Income Tax liability. Compare New Tax Regime vs Old Tax Regime with standard deduction (₹75k), Section 87A rebate, and health cess.",
   alternates: {
     canonical: 'https://studenttools.cyou/finance/tax-calculator',
   },
   openGraph: {
-    title: "Income Tax Calculator India (New vs Old Regime FY 2024-25 & 2025-26) | StudentTools",
+    title: "Income Tax Calculator India FY 2025-26 (New vs Old Regime, Section 87A & Cess) | StudentTools",
     description: "Calculate Indian Income Tax liability. Compare New Tax Regime vs Old Tax Regime with standard deduction (₹75k), Section 87A rebate, and health cess.",
     url: 'https://studenttools.cyou/finance/tax-calculator',
     siteName: 'StudentTools',

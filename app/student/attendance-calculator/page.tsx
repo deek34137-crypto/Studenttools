@@ -9,14 +9,14 @@ const ROUTE = '/student/attendance-calculator'
 const TOOL_ID = 'student-attendance-calculator'
 
 export const metadata: Metadata = {
-  title: "Attendance Calculator (75% Rule & Safe Bunk Allowance) | StudentTools",
-  description: "Calculate your exact attendance percentage, how many consecutive classes you need to attend for 75% criteria, and how many you can safely bunk.",
+  title: "Attendance Calculator 2025-26 (75% UGC Rule & Safe Bunk Allowance) | StudentTools",
+  description: "Calculate your exact 2025-26 college attendance percentage, classes needed for 75% UGC criteria, and how many lectures you can safely bunk.",
   alternates: {
     canonical: 'https://studenttools.cyou/student/attendance-calculator',
   },
   openGraph: {
-    title: "Attendance Calculator (75% Rule & Safe Bunk Allowance) | StudentTools",
-    description: "Calculate your exact attendance percentage, how many consecutive classes you need to attend for 75% criteria, and how many you can safely bunk.",
+    title: "Attendance Calculator 2025-26 (75% UGC Rule & Safe Bunk Allowance) | StudentTools",
+    description: "Calculate your exact 2025-26 college attendance percentage, classes needed for 75% UGC criteria, and how many lectures you can safely bunk.",
     url: 'https://studenttools.cyou/student/attendance-calculator',
     siteName: 'StudentTools',
     type: 'website',

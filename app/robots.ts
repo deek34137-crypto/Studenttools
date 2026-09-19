@@ -1,7 +1,10 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
+  let baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.studenttools.cyou'
+  if (baseUrl.includes('studenttools.cyou') && !baseUrl.includes('www.')) {
+    baseUrl = baseUrl.replace('studenttools.cyou', 'www.studenttools.cyou')
+  }
 
   return {
     rules: [

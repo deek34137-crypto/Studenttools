@@ -9,14 +9,14 @@ const ROUTE = '/jee/percentile-to-rank'
 const TOOL_ID = 'jee-percentile-to-rank'
 
 export const metadata: Metadata = {
-  title: "JEE Main Percentile to Rank Estimator (CRL & Category Rank) | StudentTools",
-  description: "Convert your JEE Main NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
+  title: "JEE Main Percentile to Rank Estimator 2025-26 (CRL & Category Rank) | StudentTools",
+  description: "Convert your JEE Main 2025-26 NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
   alternates: {
     canonical: 'https://studenttools.cyou/jee/percentile-to-rank',
   },
   openGraph: {
-    title: "JEE Main Percentile to Rank Estimator (CRL & Category Rank) | StudentTools",
-    description: "Convert your JEE Main NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
+    title: "JEE Main Percentile to Rank Estimator 2025-26 (CRL & Category Rank) | StudentTools",
+    description: "Convert your JEE Main 2025-26 NTA percentile score into an estimated All India CRL rank and category rank with statistical error ranges.",
     url: 'https://studenttools.cyou/jee/percentile-to-rank',
     siteName: 'StudentTools',
     type: 'website',

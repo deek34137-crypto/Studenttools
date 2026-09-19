@@ -9,14 +9,14 @@ const ROUTE = '/jee/marks-calculator'
 const TOOL_ID = 'jee-marks-calculator'
 
 export const metadata: Metadata = {
-  title: "JEE Main Marks Calculator (Subject-Wise & Negative Marking) | StudentTools",
-  description: "Calculate your JEE Main raw score with +4 for correct, -1 for incorrect, and review subject-wise performance and accuracy.",
+  title: "JEE Main Marks Calculator 2025-26 (Subject-Wise & Negative Marking) | StudentTools",
+  description: "Calculate your JEE Main 2025-26 raw score with +4 for correct, -1 for incorrect answers. Review subject-wise performance and accuracy instantly.",
   alternates: {
     canonical: 'https://studenttools.cyou/jee/marks-calculator',
   },
   openGraph: {
-    title: "JEE Main Marks Calculator (Subject-Wise & Negative Marking) | StudentTools",
-    description: "Calculate your JEE Main raw score with +4 for correct, -1 for incorrect, and review subject-wise performance and accuracy.",
+    title: "JEE Main Marks Calculator 2025-26 (Subject-Wise & Negative Marking) | StudentTools",
+    description: "Calculate your JEE Main 2025-26 raw score with +4 for correct, -1 for incorrect answers. Review subject-wise performance and accuracy instantly.",
     url: 'https://studenttools.cyou/jee/marks-calculator',
     siteName: 'StudentTools',
     type: 'website',

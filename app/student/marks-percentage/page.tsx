@@ -9,14 +9,14 @@ const ROUTE = '/student/marks-percentage'
 const TOOL_ID = 'student-marks-percentage'
 
 export const metadata: Metadata = {
-  title: "Marks Percentage Calculator (Dynamic Subjects & Overall Grade) | StudentTools",
-  description: "Calculate total percentage and average score across any number of subjects. Perfect for CBSE, ICSE, and state board marksheets.",
+  title: "Marks Percentage Calculator 2025-26 (CBSE, ICSE & State Board) | StudentTools",
+  description: "Calculate total percentage and average score across any number of subjects in 2025-26. Perfect for CBSE, ICSE, and state board marksheets.",
   alternates: {
     canonical: 'https://studenttools.cyou/student/marks-percentage',
   },
   openGraph: {
-    title: "Marks Percentage Calculator (Dynamic Subjects & Overall Grade) | StudentTools",
-    description: "Calculate total percentage and average score across any number of subjects. Perfect for CBSE, ICSE, and state board marksheets.",
+    title: "Marks Percentage Calculator 2025-26 (CBSE, ICSE & State Board) | StudentTools",
+    description: "Calculate total percentage and average score across any number of subjects in 2025-26. Perfect for CBSE, ICSE, and state board marksheets.",
     url: 'https://studenttools.cyou/student/marks-percentage',
     siteName: 'StudentTools',
     type: 'website',

@@ -9,14 +9,14 @@ const ROUTE = '/finance/sip-calculator'
 const TOOL_ID = 'finance-sip-calculator'
 
 export const metadata: Metadata = {
-  title: "SIP Calculator (Mutual Fund Returns & Compound Wealth Projector) | StudentTools",
-  description: "Project your mutual fund SIP returns. Calculate total invested capital, estimated gains, and final maturity value over 1 to 30 years.",
+  title: "SIP Calculator 2025-26 (Mutual Fund Returns & Compound Wealth Projector) | StudentTools",
+  description: "Project your 2025-26 mutual fund SIP returns. Calculate total invested capital, estimated gains, and final maturity value over 1 to 30 years.",
   alternates: {
     canonical: 'https://studenttools.cyou/finance/sip-calculator',
   },
   openGraph: {
-    title: "SIP Calculator (Mutual Fund Returns & Compound Wealth Projector) | StudentTools",
-    description: "Project your mutual fund SIP returns. Calculate total invested capital, estimated gains, and final maturity value over 1 to 30 years.",
+    title: "SIP Calculator 2025-26 (Mutual Fund Returns & Compound Wealth Projector) | StudentTools",
+    description: "Project your 2025-26 mutual fund SIP returns. Calculate total invested capital, estimated gains, and final maturity value over 1 to 30 years.",
     url: 'https://studenttools.cyou/finance/sip-calculator',
     siteName: 'StudentTools',
     type: 'website',

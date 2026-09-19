@@ -9,14 +9,14 @@ const ROUTE = '/jee/marks-to-percentile'
 const TOOL_ID = 'jee-marks-to-percentile'
 
 export const metadata: Metadata = {
-  title: "JEE Main Marks to Percentile Estimator (Shift-Wise Normalization Range) | StudentTools",
-  description: "Estimate your JEE Main percentile from your total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
+  title: "JEE Main Marks to Percentile Estimator 2025-26 (Shift-Wise Normalization) | StudentTools",
+  description: "Estimate your JEE Main 2025-26 percentile from total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
   alternates: {
     canonical: 'https://studenttools.cyou/jee/marks-to-percentile',
   },
   openGraph: {
-    title: "JEE Main Marks to Percentile Estimator (Shift-Wise Normalization Range) | StudentTools",
-    description: "Estimate your JEE Main percentile from your total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
+    title: "JEE Main Marks to Percentile Estimator 2025-26 (Shift-Wise Normalization) | StudentTools",
+    description: "Estimate your JEE Main 2025-26 percentile from total marks. View shift-wise difficulty benchmarks, normalization methodology, and score-to-percentile ranges.",
     url: 'https://studenttools.cyou/jee/marks-to-percentile',
     siteName: 'StudentTools',
     type: 'website',

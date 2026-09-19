@@ -9,14 +9,14 @@ const ROUTE = '/student/study-hours'
 const TOOL_ID = 'student-study-hours'
 
 export const metadata: Metadata = {
-  title: "Study Hours Calculator (Exam Revision Time Budget & Planner) | StudentTools",
-  description: "Calculate total available study hours before your exams and allocate time proportionally across high, medium, and low priority subjects.",
+  title: "Study Hours Calculator 2025-26 (Exam Revision Time Budget & Planner) | StudentTools",
+  description: "Plan your 2025-26 exam preparation. Calculate available study hours and allocate revision time across high, medium, and low priority subjects.",
   alternates: {
     canonical: 'https://studenttools.cyou/student/study-hours',
   },
   openGraph: {
-    title: "Study Hours Calculator (Exam Revision Time Budget & Planner) | StudentTools",
-    description: "Calculate total available study hours before your exams and allocate time proportionally across high, medium, and low priority subjects.",
+    title: "Study Hours Calculator 2025-26 (Exam Revision Time Budget & Planner) | StudentTools",
+    description: "Plan your 2025-26 exam preparation. Calculate available study hours and allocate revision time across high, medium, and low priority subjects.",
     url: 'https://studenttools.cyou/student/study-hours',
     siteName: 'StudentTools',
     type: 'website',
