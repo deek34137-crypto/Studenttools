@@ -1,6 +1,17 @@
 import { JEE_MARKING_SCHEME, ESTIMATED_TOTAL_CANDIDATES_DEFAULT, UPCOMING_JEE_SESSIONS } from '../../data/jee/config'
-import { CutoffRecord, Category, Quota, InstituteType } from '../../data/jee/types'
+import {
+  CutoffRecord,
+  Category,
+  Quota,
+  InstituteType,
+  Gender,
+  BranchCategory,
+  HistoricalCutoffBand,
+  CollegePredictorParams,
+  CollegePredictionItem,
+} from '../../data/jee/types'
 import cutoffsData from '../../data/jee/cutoffs.json'
+
 
 export interface SubjectMarksInput {
   correct: number
@@ -65,12 +76,8 @@ export interface RankEstimateResult {
   disclaimer: string
 }
 
-export interface CollegePredictionItem {
-  record: CutoffRecord
-  chance: 'High' | 'Moderate' | 'Borderline' | 'Low'
-  rankDiff: number
-  recommendation: string
-}
+export type { CollegePredictionItem }
+
 
 export interface CountdownResult {
   sessionName: string
@@ -310,6 +317,113 @@ export function getJeeCountdown(targetSessionIndex: number = 0, now: Date = new 
   }
 }
 
+export const INDIAN_STATES_AND_UTS = [
+  'Andhra Pradesh',
+  'Arunachal Pradesh',
+  'Assam',
+  'Bihar',
+  'Chandigarh',
+  'Chhattisgarh',
+  'Delhi',
+  'Goa',
+  'Gujarat',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jammu and Kashmir',
+  'Jharkhand',
+  'Karnataka',
+  'Kerala',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Manipur',
+  'Meghalaya',
+  'Mizoram',
+  'Nagaland',
+  'Odisha',
+  'Puducherry',
+  'Punjab',
+  'Rajasthan',
+  'Sikkim',
+  'Tamil Nadu',
+  'Telangana',
+  'Tripura',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'West Bengal',
+] as const
+
+export const BRANCH_CATEGORY_OPTIONS: { value: BranchCategory | 'ALL'; label: string }[] = [
+  { value: 'ALL', label: 'All Disciplines' },
+  { value: 'CSE', label: 'Computer Science (CSE)' },
+  { value: 'AI', label: 'AI & Data Science (AI / DS)' },
+  { value: 'IT', label: 'Information Technology (IT)' },
+  { value: 'ECE', label: 'Electronics & Communication (ECE)' },
+  { value: 'EE', label: 'Electrical Engineering (EE / EEE)' },
+  { value: 'ME', label: 'Mechanical Engineering (ME)' },
+  { value: 'CE', label: 'Civil Engineering (CE)' },
+  { value: 'Chemical', label: 'Chemical Engineering' },
+  { value: 'Biotechnology', label: 'Biotechnology / Bio Engg' },
+  { value: 'Production', label: 'Production & Industrial' },
+  { value: 'Metallurgy', label: 'Metallurgy & Materials' },
+  { value: 'Aerospace', label: 'Aerospace Engineering' },
+  { value: 'Architecture', label: 'Architecture & Planning (B.Arch)' },
+]
+
+export function normalizeBranchCategory(branch: string): BranchCategory {
+  const b = branch.toLowerCase()
+  if (
+    b.includes('data science') ||
+    b.includes('artificial intelligence') ||
+    b.includes('ai &') ||
+    b.includes('ai and') ||
+    b.includes('machine learning')
+  ) {
+    return 'AI'
+  }
+  if (b.includes('computer') || b.includes('cse') || b.includes('software')) {
+    return 'CSE'
+  }
+  if (b.includes('information tech') || b.includes('it') || b.includes('infotech')) {
+    return 'IT'
+  }
+  if (
+    b.includes('electronics and communication') ||
+    b.includes('electronics & communication') ||
+    b.includes('ece') ||
+    b.includes('telecommunication')
+  ) {
+    return 'ECE'
+  }
+  if (b.includes('electrical') || b.includes('eee')) {
+    return 'EE'
+  }
+  if (b.includes('mechanical')) {
+    return 'ME'
+  }
+  if (b.includes('civil')) {
+    return 'CE'
+  }
+  if (b.includes('chemical')) {
+    return 'Chemical'
+  }
+  if (b.includes('biotech') || b.includes('biomedical') || b.includes('biochemical')) {
+    return 'Biotechnology'
+  }
+  if (b.includes('production') || b.includes('industrial') || b.includes('manufacturing')) {
+    return 'Production'
+  }
+  if (b.includes('metallurg') || b.includes('materials')) {
+    return 'Metallurgy'
+  }
+  if (b.includes('aerospace') || b.includes('aeronautical')) {
+    return 'Aerospace'
+  }
+  if (b.includes('architecture') || b.includes('planning') || b.includes('b.arch')) {
+    return 'Architecture'
+  }
+  return 'Other'
+}
+
 export function queryCutoffs(filters: {
   institute?: string
   branch?: string
@@ -328,60 +442,178 @@ export function queryCutoffs(filters: {
   })
 }
 
-export function predictColleges(params: {
-  rank: number
-  category?: Category
-  quota?: Quota
-  preferredBranch?: string
-  instituteType?: InstituteType
-}): CollegePredictionItem[] {
-  const safeRank = Math.max(1, isNaN(params.rank) ? 1 : params.rank)
-  const category = params.category || 'OPEN'
+export interface ExtendedPredictorParams extends Partial<CollegePredictorParams> {
+  rank?: number // legacy backwards compatibility
+}
+
+export function predictColleges(params: ExtendedPredictorParams): CollegePredictionItem[] {
+  const rawRank = params.crlRank !== undefined ? params.crlRank : params.rank !== undefined ? params.rank : 4500
+  const safeCrl = Math.max(1, isNaN(rawRank) ? 1 : Math.round(rawRank))
+  const candidateCategory: Category = params.category || 'OPEN'
+  const candidateGender: Gender = params.gender || 'Gender-Neutral'
+  const candidateState = (params.homeState || '').trim().toLowerCase()
+  const quotaMode = params.quota || 'AUTO'
   const allCutoffs = cutoffsData as CutoffRecord[]
 
   const filtered = allCutoffs.filter((rec) => {
-    if (rec.category !== category) return false
-    if (params.quota && rec.quota !== params.quota) return false
-    if (params.instituteType && rec.instituteType !== params.instituteType) return false
-    if (params.preferredBranch && !rec.branch.toLowerCase().includes(params.preferredBranch.toLowerCase())) return false
+    // 1. Category evaluation:
+    // If user is OPEN: only OPEN seats are applicable.
+    // If user has reserved category: both their reserved category seats AND OPEN seats are applicable.
+    if (candidateCategory === 'OPEN') {
+      if (rec.category !== 'OPEN') return false
+    } else {
+      if (rec.category !== candidateCategory && rec.category !== 'OPEN') return false
+    }
+
+    // 2. Gender pool evaluation:
+    // Gender-Neutral candidate matches only Gender-Neutral seats.
+    // Female-only candidate matches both Female-only (supernumerary) and Gender-Neutral seats.
+    if (candidateGender === 'Gender-Neutral' && rec.gender === 'Female-only') {
+      return false
+    }
+
+    // 3. Institute Type filter
+    if (params.instituteType && params.instituteType !== 'ALL') {
+      if (rec.instituteType !== params.instituteType) return false
+    }
+
+
+    // 4. Quota evaluation
+    if (quotaMode === 'AUTO') {
+      if (candidateState && candidateState !== 'all') {
+        if (rec.instituteType === 'NIT' || (rec.instituteType === 'GFTI' && (rec.quota === 'HS' || rec.quota === 'OS'))) {
+          const isHomeState = rec.state.toLowerCase() === candidateState
+          if (isHomeState && rec.quota !== 'HS') return false
+          if (!isHomeState && rec.quota !== 'OS') return false
+        }
+        // For AI (All India) quota, everyone is eligible regardless of home state
+      }
+    } else if (quotaMode !== 'ALL') {
+      if (rec.quota !== quotaMode) return false
+    }
+
+    // 5. Branch filters
+    if (params.branchCategory && params.branchCategory !== 'ALL') {
+      const norm = normalizeBranchCategory(rec.branch)
+      if (norm !== params.branchCategory) return false
+    }
+
+    if (params.preferredBranch && params.preferredBranch.trim()) {
+      const query = params.preferredBranch.trim().toLowerCase()
+      const matchesBranch = rec.branch.toLowerCase().includes(query)
+      const matchesNorm = normalizeBranchCategory(rec.branch).toLowerCase().includes(query)
+      if (!matchesBranch && !matchesNorm) return false
+    }
+
+    // 6. Round filter
+    if (params.round && params.round !== 'ALL') {
+      if (rec.round !== Number(params.round)) return false
+    }
+
+    // 7. Year filter
+    if (params.year && params.year > 0) {
+      if (rec.year !== Number(params.year)) return false
+    }
+
     return true
   })
 
   const results: CollegePredictionItem[] = []
 
   for (const record of filtered) {
-    const diff = record.closingRank - safeRank
-    let chance: 'High' | 'Moderate' | 'Borderline' | 'Low'
-    let recommendation: string
+    // Determine the correct rank to compare:
+    // For OPEN seats: CRL rank is compared.
+    // For reserved seats: Category rank is compared against category closing rank.
+    let evaluatedRank: number
+    let evaluatedRankType: 'CRL' | 'Category Rank'
 
-    if (diff >= 300) {
-      chance = 'High'
-      recommendation = `Strong admission probability based on Round ${record.round} cutoff.`
-    } else if (diff >= -50) {
-      chance = 'Moderate'
-      recommendation = 'Competitive; historically falls around the cutoff boundary.'
-    } else if (diff >= -600) {
-      chance = 'Borderline'
-      recommendation = 'May be attainable in later JoSAA rounds or CSAB special rounds.'
+    if (record.category === 'OPEN') {
+      evaluatedRank = safeCrl
+      evaluatedRankType = 'CRL'
     } else {
-      chance = 'Low'
-      recommendation = 'Historical cutoff was higher than current rank.'
+      evaluatedRankType = 'Category Rank'
+      if (params.categoryRank && params.categoryRank > 0) {
+        evaluatedRank = Math.max(1, Math.round(params.categoryRank))
+      } else {
+        // Statistical fallback factor if candidate did not input category rank
+        const factors: Record<string, number> = {
+          'OBC-NCL': 0.30,
+          'EWS': 0.10,
+          'SC': 0.15,
+          'ST': 0.075,
+          'OPEN-PwD': 0.03,
+        }
+        const factor = factors[record.category] || 0.2
+        evaluatedRank = Math.max(1, Math.round(safeCrl * factor))
+      }
+    }
+
+    const diff = record.closingRank - evaluatedRank
+
+    let band: HistoricalCutoffBand
+    let bandLabel: string
+    let chance: 'High' | 'Moderate' | 'Borderline' | 'Low'
+    let statusDescription: string
+
+    if (diff >= 0) {
+      band = 'WITHIN_CUTOFF'
+      bandLabel = 'Within historical closing rank'
+      chance = diff >= 300 ? 'High' : 'Moderate'
+      statusDescription =
+        diff === 0
+          ? 'Exact match with historical closing cutoff rank.'
+          : `${diff.toLocaleString('en-IN')} rank cushion inside historical closing cutoff.`
+    } else {
+      // Near cutoff threshold: within 15% or up to 800 ranks beyond closing cutoff
+      const nearThreshold = Math.max(800, Math.round(record.closingRank * 0.15))
+      const gap = Math.abs(diff)
+
+      if (gap <= nearThreshold) {
+        band = 'NEAR_CUTOFF'
+        bandLabel = 'Near historical cutoff'
+        chance = 'Borderline'
+        statusDescription = `~${gap.toLocaleString('en-IN')} ranks beyond historical closing; strong possibility in later JoSAA rounds or CSAB special spot rounds.`
+      } else {
+        band = 'OUTSIDE_CUTOFF'
+        bandLabel = 'Outside historical closing range'
+        chance = 'Low'
+        statusDescription = `${gap.toLocaleString('en-IN')} ranks beyond historical closing cutoff.`
+      }
     }
 
     results.push({
       record,
-      chance,
+      band,
+      bandLabel,
+      evaluatedRank,
+      evaluatedRankType,
       rankDiff: diff,
-      recommendation,
+      statusDescription,
+      chance,
+      recommendation: statusDescription,
     })
   }
 
-  const chanceWeight: Record<string, number> = { High: 3, Moderate: 2, Borderline: 1, Low: 0 }
+  // Sort results logically:
+  // 1. Within cutoff first, ordered by closing rank ascending (most competitive / premier first)
+  // 2. Near cutoff next, ordered by smallest gap to cutoff
+  // 3. Outside cutoff last, ordered by smallest gap
+  const bandWeight: Record<HistoricalCutoffBand, number> = {
+    WITHIN_CUTOFF: 2,
+    NEAR_CUTOFF: 1,
+    OUTSIDE_CUTOFF: 0,
+  }
+
   results.sort((a, b) => {
-    const wDiff = chanceWeight[b.chance] - chanceWeight[a.chance]
-    if (wDiff !== 0) return wDiff
-    return a.record.closingRank - b.record.closingRank
+    const bDiff = bandWeight[b.band] - bandWeight[a.band]
+    if (bDiff !== 0) return bDiff
+
+    if (a.band === 'WITHIN_CUTOFF') {
+      return a.record.closingRank - b.record.closingRank
+    }
+    return Math.abs(a.rankDiff) - Math.abs(b.rankDiff)
   })
 
   return results
 }
+

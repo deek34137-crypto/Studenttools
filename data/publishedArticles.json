@@ -1,0 +1,51 @@
+[
+  {
+    "id": "art_st001_jee_negative_marking",
+    "topic_id": "ST001",
+    "title": "How JEE Main Negative Marking Affects Your Total Score",
+    "slug": "how-jee-main-negative-marking-affects-score",
+    "excerpt": "In JEE Main Paper 1, every correct answer earns +4 marks while each incorrect attempt costs -1 mark. Discover how negative marking impacts your raw score, why accuracy outweighs attempt volume, and how to calculate marks effectively.",
+    "meta_title": "How JEE Main Negative Marking Affects Your Total Score | StudentTools",
+    "meta_description": "Comprehensive guide on the JEE Main 2026 marking scheme (+4/-1), calculating raw score impact, guessing risks, and using the JEE Marks Calculator.",
+    "primary_keyword": "jee main negative marking",
+    "secondary_keywords": [
+      "jee marking scheme",
+      "negative marking impact",
+      "jee scoring rules",
+      "4 marks minus 1",
+      "jee raw score calculation"
+    ],
+    "category": "JEE",
+    "topic_cluster": "Marks & Scoring",
+    "article_type": "Explanation",
+    "search_intent": "Educational",
+    "content": "In JEE Main Paper 1, every correct answer earns **+4 marks**, every incorrect answer costs **−1 mark**, and an unanswered question receives **0 marks**. Because of this penalty structure, negative marking can substantially reduce your raw score—especially when attempting questions with low confidence.\n\nUnderstanding how negative marking works is essential for designing a realistic exam attempt strategy. Furthermore, your final **NTA Score (percentile)** is calculated separately through normalization across shifts based on this raw score.\n\n## JEE Main Negative Marking: The Basic Rule\n\nFor JEE Main Paper 1 (B.E./B.Tech.), the official NTA marking scheme is:\n\n| Response Type | Marks Awarded |\n| :--- | :--- |\n| Correct answer | +4 |\n| Incorrect answer | −1 |\n| Unanswered question | 0 |\n\nCrucially, negative marking applies to **both Section A (Multiple Choice Questions) and Section B (Numerical-Value Questions)**.\n\nPaper 1 contains **75 questions worth 300 marks**:\n- **Mathematics**: 25 questions → 100 marks (20 MCQs + 5 Numerical)\n- **Physics**: 25 questions → 100 marks (20 MCQs + 5 Numerical)\n- **Chemistry**: 25 questions → 100 marks (20 MCQs + 5 Numerical)\n\n## JEE Main Marks Formula With Negative Marking\n\nThe fundamental formula to compute your raw score is:\n\n```text\nRaw Marks = (Correct Answers × 4) − (Incorrect Answers × 1)\n```\n\nOr algebraically:\n\n```text\nMarks = 4C − I\n```\n\nWhere:\n- **C** = Number of correct answers\n- **I** = Number of incorrect answers\n- Unattempted questions contribute 0 marks.\n\n### Worked Example\n\nSuppose you attempted 60 out of 75 questions in a mock exam:\n- **Correct** = 50\n- **Incorrect** = 10\n- **Unattempted** = 15\n\nCalculation:\n- Correct marks = `50 × 4 = 200`\n- Negative marks = `10 × 1 = 10`\n- **Total raw marks** = `200 − 10 = 190 / 300`\n\nEven though you attempted 60 questions (worth 240 marks), negative deductions brought your score down to 190.\n\n## How Much Does One Wrong Answer Really Cost?\n\nA common mistake among aspirants is assuming that a wrong answer only costs 1 mark. In reality, the **opportunity cost is 5 marks**.\n\nIf you mark a question correctly, you gain `+4`. If you mark it incorrectly, you get `−1`.\n\n```text\nOpportunity Cost = +4 − (−1) = 5 Marks\n```\n\nConverting a wrong attempt into a correct answer yields an immediate 5-mark boost.\n\n### The Impact of 5 Wrong Answers\n\n- Direct penalty: `5 × (−1) = −5 marks`\n- Potential gain if answered correctly: `5 × (+4) = +20 marks`\n- **Net swing**: `25 marks`\n\nIn competitive exams like JEE Main, a 25-mark swing can alter your all-India rank by tens of thousands of positions.\n\n## How Negative Marking Changes Scores for the Same Attempts\n\nConsider three hypothetical candidates who each attempt 60 questions:\n\n| Candidate | Correct | Wrong | Unattempted | Raw Score / 300 |\n| :--- | :--- | :--- | :--- | :--- |\n| **Candidate A** | 55 | 5 | 15 | **215** |\n| **Candidate B** | 50 | 10 | 15 | **190** |\n| **Candidate C** | 45 | 15 | 15 | **165** |\n\nAll three candidates attempted the exact same number of questions (60). Yet, due to accuracy differences, Candidate A scored **50 marks higher** than Candidate C.\n\n## When Is Attempting a Question Statistically Worth It?\n\nFor a standard +4/−1 question, suppose your probability of guessing correctly is *p*. The expected marks from attempting the question are:\n\n```text\nExpected Value (EV) = 4p − 1(1 − p) = 5p − 1\n```\n\nFor the expected value to be positive:\n\n```text\n5p − 1 > 0  ==>  p > 0.20 (20%)\n```\n\n- In a **4-option MCQ**, pure blind guessing has a probability of `25%` (`p = 0.25`). The expected value is slightly positive (`+0.25` marks).\n- However, if you can **eliminate even one option** (`p = 33.3%`), your expected score rises to `+0.67` marks per question.\n- If you can **eliminate two options** (`p = 50%`), expected gain is `+1.5` marks.\n\n> **Strategic Rule**: Never guess blindly when rushed. But if you have eliminated 1 or 2 options with solid conceptual grounding, taking a calculated risk is statistically favorable over the long run.\n\n## What About Section B Numerical Questions?\n\nMany students still operate on older information assuming numerical questions carry zero negative marking. **Under the current NTA scheme, Section B numerical questions also have negative marking (-1 for incorrect responses).**\n\nTherefore, never treat numerical questions as free guesses. Only submit calculated values when your derivation is reliable.\n\n## Raw Marks vs NTA Percentile Score\n\nRemember that raw marks are **not** your percentile score.\n\nBecause JEE Main is conducted across multiple shifts of differing difficulty, NTA applies a mathematical normalization formula. A raw score of `180 / 300` (which is 60% of total marks) may correspond to a **99+ percentile** in a difficult shift, or a **97 percentile** in a comparatively easier shift.\n\nAlways use raw marks to track personal accuracy, not to assume fixed percentiles.\n\n## How to Calculate Your Score Using StudentTools\n\nYou can calculate your raw score and accuracy in seconds using the [JEE Marks Calculator](/jee/marks-calculator):\n\n1. **Enter Correct Answers**: Input the number of questions answered correctly (e.g. 48).\n2. **Enter Incorrect Answers**: Input questions answered incorrectly (e.g. 12).\n3. **View Raw Score**: The calculator computes `(48 × 4) − 12 = 180 / 300`.\n4. **Review Accuracy Rate**: It instantly provides your accuracy metric: `48 / 60 = 80%`.\n\nUsing this breakdown after every mock test will help you identify whether your score ceiling is caused by knowledge gaps or reckless negative penalties.",
+    "faq": [
+      {
+        "question": "How much is 1 wrong answer worth in JEE Main?",
+        "answer": "One incorrect answer results in a −1 mark penalty under the JEE Main Paper 1 marking scheme. Because a correct answer yields +4, changing an incorrect response to a correct one creates a 5-mark opportunity gain in your final raw score."
+      },
+      {
+        "question": "Is there negative marking in JEE Main numerical questions?",
+        "answer": "Yes. In JEE Main Paper 1, numerical-value questions in Section B carry negative marking: +4 for correct, −1 for incorrect, and 0 for unattempted questions."
+      },
+      {
+        "question": "Does negative marking affect JEE Main percentile?",
+        "answer": "Yes, indirectly. Negative marking reduces your raw marks, which are subsequently used in NTA's percentile normalization across shifts. However, raw marks and NTA percentile are different measures."
+      }
+    ],
+    "related_tools": [
+      {
+        "name": "JEE Marks Calculator",
+        "route": "/jee/marks-calculator",
+        "description": "Calculate your raw JEE marks, negative marking deductions, and accuracy percentage instantly."
+      }
+    ],
+    "status": "PUBLISHED",
+    "published_at": "2026-09-19T10:00:00.000Z",
+    "created_at": "2026-09-19T10:00:00.000Z",
+    "updated_at": "2026-09-19T10:00:00.000Z",
+    "reading_time_minutes": 6,
+    "content_hash": "hash_st001_manual_pub"
+  }
+]

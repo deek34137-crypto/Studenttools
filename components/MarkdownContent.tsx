@@ -56,6 +56,40 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
           )
         }
 
+        // Markdown Table
+        if (trimmed.startsWith('|') && trimmed.includes('\n|')) {
+          const lines = trimmed.split('\n').filter((l) => l.trim().startsWith('|'))
+          if (lines.length >= 2) {
+            const headerCells = lines[0].split('|').slice(1, -1).map((c) => c.trim())
+            const bodyLines = lines.slice(lines[1].includes('---') ? 2 : 1)
+            return (
+              <div key={idx} className="my-6 overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                <table className="w-full text-left text-xs sm:text-sm">
+                  <thead className="bg-slate-50 border-b border-slate-200 text-slate-900 font-semibold">
+                    <tr>
+                      {headerCells.map((h, hIdx) => (
+                        <th key={hIdx} className="py-3 px-4 font-semibold">{renderInlineFormatting(h)}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 bg-white">
+                    {bodyLines.map((row, rIdx) => {
+                      const cells = row.split('|').slice(1, -1).map((c) => c.trim())
+                      return (
+                        <tr key={rIdx} className="hover:bg-slate-50/50 transition-colors">
+                          {cells.map((cell, cIdx) => (
+                            <td key={cIdx} className="py-2.5 px-4 text-slate-700">{renderInlineFormatting(cell)}</td>
+                          ))}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )
+          }
+        }
+
         // Unordered List
         if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
           const items = trimmed.split('\n').map((line) => line.replace(/^[-*]\s+/, '').trim())

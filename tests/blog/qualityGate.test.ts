@@ -8,50 +8,61 @@ import { ArticleGeneratedData } from '../../lib/gemini/client'
 
 describe('Automated Content Quality Gate & Similarity Engine', () => {
   const validArticle: ArticleGeneratedData = {
-    title: 'How JEE Main Negative Marking Affects Total Score',
-    slug: 'how-jee-main-negative-marking-affects-score',
-    excerpt: 'Detailed breakdown of how the +4 and -1 marking scheme impacts your overall score and percentile in JEE Main with numerical comparisons.',
-    metaTitle: 'JEE Main Negative Marking Impact & Scoring Rules | StudentTools',
-    metaDescription: 'Understand how negative marking works in JEE Main Paper 1 with +4 for correct and -1 for wrong answers. Try our free marks calculator.',
-    primaryKeyword: 'jee main negative marking',
-    secondaryKeywords: ['jee marks', 'scoring rules', 'negative marking impact'],
-    category: 'JEE',
-    topicCluster: 'Marks & Scoring',
-    articleType: 'Explanation',
-    content: `## Understanding the Marking Scheme in JEE Main
-In the JEE Main examination conducted by the National Testing Agency (NTA), scoring follows a standard +4 and -1 pattern. For each question answered correctly, candidates are awarded four marks, whereas an incorrect attempt attracts a deduction of one mark. This marking scheme applies to both multiple-choice questions (Section A) and numerical value questions (Section B). Unattempted questions carry zero penalty and do not influence your score directly.
+    title: 'How to Convert CBSE CGPA to Percentage Accurately',
+    slug: 'test-cbse-cgpa-to-percentage-conversion-guide',
+    excerpt: 'Step-by-step guide explaining the official CBSE 9.5 multiplier rule for converting cumulative grade point averages into percentages.',
+    metaTitle: 'How to Convert CBSE CGPA to Percentage (9.5x Rule Guide) | StudentTools',
+    metaDescription: 'Learn how to convert your 10-point CBSE CGPA to equivalent percentage using the standard 9.5 multiplier formula with worked examples and table.',
+    primaryKeyword: 'cbse cgpa to percentage',
+    secondaryKeywords: ['cgpa converter', '9.5 rule', 'cgpa to marks percentage'],
+    category: 'Student',
+    topicCluster: 'Grading Systems',
+    articleType: 'How-To Guide',
+    content: `## Understanding the Official CBSE CGPA Grading System
+The Central Board of Secondary Education (CBSE) utilizes a 10-point Cumulative Grade Point Average (CGPA) system to assess students in secondary and higher secondary examinations. Instead of awarding raw percentage marks directly on initial transcripts, students receive grade points ranging from 1 to 10 across their primary subjects. While this grading approach minimizes unwholesome competition and excessive exam stress among learners, high school graduates frequently need to report raw percentage equivalents when submitting applications for admissions, competitive entrance exams, scholarships, or government verification portals.
 
-Understanding the mathematical expectation behind this scheme is essential for competitive exam aspirants across India. When you attempt a question with complete certainty, the expected value is +4 marks. However, when blind guessing among four options, your probability of picking the correct answer is 25%, and picking an incorrect answer is 75%. The mathematical expected value of a random guess is (0.25 * 4) + (0.75 * -1) = 1.0 - 0.75 = +0.25 marks. While this seems slightly positive theoretically, the high variance in small sample sizes frequently results in severe negative score swings.
+To facilitate a standardized conversion across all affiliated schools throughout India, CBSE introduced an official mathematical multiplier: the 9.5 factor. Many students wonder why the multiplier is 9.5 rather than a straightforward 10.0. The CBSE curriculum committee analyzed mark distributions over several academic cycles and established that an average grade point band represents the midpoint of a range, making 9.5 the most statistically accurate nationwide approximation of actual scoring performance.
 
-## Why Negative Marking Creates Non-Linear Risk
-Consider attempting ten questions where you guess without certainty. If two are correct and eight are wrong, your gross score is eight marks, but the penalty deductions amount to eight marks, yielding a net score of zero. Even worse, if you get one correct and nine incorrect, your net score drops to -5 marks from those ten questions.
+## Step-by-Step Calculation Using the 9.5 Multiplier Formula
+Converting your CGPA to an equivalent percentage is straightforward once you know the exact formula endorsed by board authorities:
 
-In competitive examinations like JEE Main, where a difference of a single mark can shift your All India Common Rank List (CRL) standing by several hundred or thousand ranks, unforced negative marks are catastrophic. Aspirants often believe that attempting more questions automatically improves their percentile. In reality, aggressive low-accuracy guessing degrades both your raw score and your shift-normalized percentile standing.
+Percentage (%) = CGPA × 9.5
 
-## Practical Scoring Examples and Analysis
-Let us examine a candidate attempting 65 questions out of 75 in Paper 1 under different accuracy conditions:
-- High accuracy scenario: 58 correct and 7 incorrect yields (58 * 4) - (7 * 1) = 232 - 7 = 225 marks. In most moderate shifts, a raw score of 225 easily secures a 99.4+ percentile and guarantees admission to premier NITs in computer science or electrical branches.
-- Moderate accuracy scenario: 50 correct and 15 incorrect yields (50 * 4) - (15 * 1) = 200 - 15 = 185 marks. This yields roughly a 98.8 to 99.1 percentile.
-- Low accuracy scenario: 40 correct and 25 incorrect yields (40 * 4) - (25 * 1) = 160 - 25 = 135 marks. Here, 25 negative marks cost the student over 50,000 ranks in the All India merit list.
+For example, if a student secures an overall CGPA of 8.8 across five academic subjects, the calculation proceeds as follows:
+- Take the total CGPA: 8.8
+- Multiply by the standard factor: 8.8 × 9.5
+- The resulting equivalent percentage is: 83.6%
 
-## Tactical Guidelines for Exam Day
-To optimize your score with the JEE Marks Calculator, follow a disciplined two-pass test-taking strategy:
-First, solve questions you are 100% confident in during the first 90 minutes. Second, revisit marked questions where you can definitively eliminate at least two incorrect options through dimensional analysis or boundary conditions. Never guess purely at random on numerical value questions where no options exist to eliminate. Focus on question selection and maintain strict emotional discipline throughout the three-hour testing window.`,
+If you need to calculate the approximate subject-wise percentage for individual subjects, CBSE applies the identical rule: multiply the individual subject Grade Point (GP) by 9.5. If a candidate achieves a GP of 9 in Mathematics, the approximate percentage in Mathematics is 9 × 9.5 = 85.5%. Always remember that this conversion yields an estimated equivalent rather than an exact recreation of raw marks obtained during physical evaluation.
+
+## Practical Conversion Table and Common Academic Benchmarks
+To help students quickly evaluate their academic standing without manual math, here is a breakdown of common CGPA scores converted using the official formula:
+- CGPA 10.0: 10.0 × 9.5 = 95.0% (Represents outstanding performance in A1 grade band)
+- CGPA 9.6: 9.6 × 9.5 = 91.2% (Qualifies for top college merit lists across Delhi University and state colleges)
+- CGPA 9.0: 9.0 × 9.5 = 85.5% (Strong academic performance in first division with distinction)
+- CGPA 8.4: 8.4 × 9.5 = 79.8% (Comfortably clears admission eligibility cutoffs for leading undergraduate courses)
+- CGPA 7.6: 7.6 × 9.5 = 72.2% (Satisfies technical entrance eligibility criteria across state universities)
+- CGPA 6.8: 6.8 × 9.5 = 64.6% (Standard first division qualification)
+
+## Essential Advice for University Applications and Document Verification
+When filling out university admission forms or competitive exam registration portals such as JEE Main, NEET, CUET, or state CETs, always consult the specific guidelines published in the respective information bulletin. Most Indian university portals explicitly instruct candidates to state whether their institution follows the CBSE 9.5 conversion rule, a 10x direct multiplier, or an internal university formula like VTU or Mumbai University.
+
+Whenever submitting verified marksheets, write down the official conversion formula on the application form if requested by the scrutiny committee. You can also utilize our free CGPA to Percentage Calculator to verify multi-semester grade conversions and download instant conversion summaries for your documentation records.`,
     faq: [
       {
-        question: 'Is there negative marking in numerical questions?',
-        answer: 'Yes, NTA applies negative marking of minus one mark to both Section A and Section B questions.',
+        question: 'Why does CBSE multiply CGPA by 9.5 instead of 10?',
+        answer: 'CBSE analyzed historical score distributions across all subject bands and found that 9.5 represents the statistically verified average marks achieved by students within each grade bracket.',
       },
       {
-        question: 'How many marks are deducted for unattempted questions?',
-        answer: 'Zero marks are deducted for unattempted questions in JEE Main.',
+        question: 'Can I use the 9.5 rule for college semester conversions?',
+        answer: 'No, collegiate universities such as VTU, Mumbai University, or autonomous colleges have their own verified conversion formulas. Always check your university regulations.',
       },
     ],
     relatedTools: [
       {
-        name: 'JEE Marks Calculator',
-        route: '/jee/marks-calculator',
-        description: 'Calculate your exact JEE Main score with negative marking.',
+        name: 'CGPA to Percentage Calculator',
+        route: '/student/cgpa-to-percentage',
+        description: 'Convert college and CBSE CGPA to percentage using standard conversion rules.',
       },
     ],
   }

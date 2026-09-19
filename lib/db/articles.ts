@@ -4,6 +4,7 @@ import path from 'path'
 import os from 'os'
 import { getSupabase, isSupabaseConfigured } from './supabase'
 import { ArticleRecord, GenerationLogRecord, PublishingLockRecord } from './types'
+import bundledArticlesData from '@/data/publishedArticles.json'
 
 const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 const STORAGE_DIR = isServerless
@@ -55,6 +56,20 @@ function writeLocalJson<T>(filePath: string, data: T) {
   }
 }
 
+function getAllStoredArticles(): ArticleRecord[] {
+  const dynamicArticles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  const bundled = (Array.isArray(bundledArticlesData) ? bundledArticlesData : []) as unknown as ArticleRecord[]
+
+  const map = new Map<string, ArticleRecord>()
+  for (const a of bundled) {
+    if (a.slug) map.set(a.slug, a)
+  }
+  for (const a of dynamicArticles) {
+    if (a.slug) map.set(a.slug, a)
+  }
+  return Array.from(map.values())
+}
+
 export async function getArticleBySlug(slug: string): Promise<ArticleRecord | null> {
   const supabase = getSupabase()
 
@@ -73,8 +88,8 @@ export async function getArticleBySlug(slug: string): Promise<ArticleRecord | nu
     }
   }
 
-  // Fallback to local storage
-  const articles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  // Fallback to stored articles
+  const articles = getAllStoredArticles()
   return articles.find((a) => a.slug === slug && a.status === 'PUBLISHED') || null
 }
 
@@ -110,7 +125,7 @@ export async function listPublishedArticles(options?: {
     const to = from + limit - 1
     const { data, count, error } = await query.range(from, to)
 
-    if (!error && data) {
+    if (!error && data && data.length > 0) {
       const total = count || 0
       return {
         articles: data as ArticleRecord[],
@@ -122,8 +137,8 @@ export async function listPublishedArticles(options?: {
     console.error('Supabase listPublishedArticles error, falling back to local:', error)
   }
 
-  // Local file fallback
-  let all = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  // Stored articles fallback
+  let all = getAllStoredArticles()
   all = all.filter((a) => a.status === 'PUBLISHED')
 
   if (category && category !== 'all') {
@@ -168,7 +183,7 @@ export async function getAllPublishedSlugs(): Promise<{ slug: string; published_
     }
   }
 
-  const articles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  const articles = getAllStoredArticles()
   return articles
     .filter((a) => a.status === 'PUBLISHED')
     .map((a) => ({ slug: a.slug, published_at: a.published_at }))
@@ -194,7 +209,7 @@ export async function getArticlesByRelatedTool(
     }
   }
 
-  const articles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  const articles = getAllStoredArticles()
   return articles
     .filter(
       (a) =>
@@ -280,7 +295,7 @@ export async function getAllPublishedArticlesForSimilarity(): Promise<
     }
   }
 
-  const articles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  const articles = getAllStoredArticles()
   return articles
     .filter((a) => a.status === 'PUBLISHED')
     .map((a) => ({
@@ -371,7 +386,7 @@ export async function getArticleStats(): Promise<{
     }
   }
 
-  const articles = readLocalJson<ArticleRecord[]>(ARTICLES_FILE, [])
+  const articles = getAllStoredArticles()
   const published = articles.filter((a) => a.status === 'PUBLISHED')
   const categories: Record<string, number> = {}
   for (const item of published) {

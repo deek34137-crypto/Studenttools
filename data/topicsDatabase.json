@@ -13,11 +13,11 @@
     "content_angle": "Analyze how +4 for correct and -1 for incorrect creates non-linear scoring risks. Show numerical examples comparing aggressive guessing vs selective attempts, and illustrate net score calculations with the JEE Marks Calculator.",
     "evergreen": "YES",
     "priority": "HIGH",
-    "status": "READY",
-    "published_url": "",
-    "published_at": "",
+    "status": "PUBLISHED",
+    "published_url": "https://studenttools.cyou/blog/how-jee-main-negative-marking-affects-score",
+    "published_at": "2026-09-19T10:00:00.000Z",
     "error": "",
-    "content_hash": ""
+    "content_hash": "hash_st001_manual_pub"
   },
   {
     "topic_id": "ST002",

@@ -97,37 +97,42 @@ export const TOOL_CONTENT: Record<string, CalculatorContent> = {
     ]
   },
   "jee-college-predictor": {
-    "formulaTitle": "JoSAA Counselling Round 6 Cutoff Matching Methodology",
-    "formulaDescription": "Our algorithm matches your predicted or actual JEE Main CRL rank and Category against official JoSAA final round closing ranks across NITs, IIITs, and GFTIs.",
-    "formulaCode": "Eligibility: Closing Rank >= Candidate Rank (Filtered by Institute Type, Quota HS/OS, and Seat Category)",
+    "formulaTitle": "JoSAA Counselling Cutoff Matching & Rank Allocation Methodology",
+    "formulaDescription": "Our predictor models official JoSAA seat allocation logic: comparing your JEE Main CRL Rank against OPEN seats, your Category Rank against reserved seats (OBC, SC, ST, EWS, PwD), and resolving Home State (HS) vs Other State (OS) quotas.",
+    "formulaCode": "Admission Status: Evaluated Rank <= Closing Rank (Filtered by Institute Type, Quota HS/OS/AI, Gender Pool, and Round)",
     "calculationSteps": [
-      "Filter historical JoSAA seat allotment data by Candidate Category (OPEN, EWS, OBC-NCL, SC, ST) and Gender.",
-      "Apply Home State (HS) or Other State (OS) quota rules according to your 12th board state of eligibility.",
-      "Sort colleges into High Chance (Safe), Moderate Chance (Target), and Low Chance (Dream) tiers based on cutoff margins."
+      "Determine evaluated rank: Candidate CRL rank is matched against OPEN seats; for reserved categories, Category Rank is matched against category-specific closing ranks.",
+      "Resolve Home State (HS) vs Other State (OS) quota eligibility based on candidate's 12th board state of eligibility.",
+      "Filter by gender pool: female candidates are evaluated across both Female-only (supernumerary) and Gender-Neutral seat pools.",
+      "Classify opportunities into transparent historical bands: Within closing rank, Near historical cutoff, or Outside closing range."
     ],
     "example": {
-      "scenario": "Candidate with CRL Rank 15,000 under OBC-NCL (Other State Quota)",
-      "inputs": "Rank: 15,000 | Category: OBC-NCL | Quota: OS",
-      "calculation": "Matches historical closing ranks for top NITs and IIITs in Electrical, Mechanical, and Computer branches.",
-      "outcome": "Safe: NIT Calicut EEE, NIT Rourkela Mech | Target: NIT Warangal ECE"
+      "scenario": "SC Candidate with CRL Rank 150,000 and SC Category Rank 450",
+      "inputs": "CRL: 150,000 | SC Rank: 450 | State: Delhi | Quota: Auto (HS/OS)",
+      "calculation": "Matches SC Category Rank 450 against SC cutoffs (e.g. NIT Delhi CSE SC Closing: 890), plus CRL against OPEN cutoffs.",
+      "outcome": "Within Closing Rank: NIT Delhi CSE (SC Quota, +440 rank cushion) | Near Cutoff: NIT Trichy CSE (SC Quota)"
     },
     "assumptions": [
-      "Seats matrix remains stable with minor additions of new branches.",
-      "Historical Round 6 JoSAA cutoffs serve as reliable benchmarks for final counseling rounds."
+      "Seat allocations follow official JoSAA opening and closing rank patterns.",
+      "Round 6 cutoffs represent the final allotment benchmark prior to CSAB special spot rounds."
     ],
-    "disclaimer": "College prediction is an advisory estimation based on historical JoSAA records. Actual cutoffs fluctuate annually depending on student branch preferences and seat availability.",
+    "disclaimer": "College prediction is an advisory estimation based on historical JoSAA records. Actual cutoffs fluctuate annually depending on applicant preferences, seat matrix additions, and exam normalization.",
     "faqs": [
       {
-        "question": "What is Home State (HS) Quota in NITs?",
-        "answer": "In all National Institutes of Technology (NITs), 50% of the total seats are reserved for candidates whose 12th board examination was located in the state where the NIT is situated."
+        "question": "Does JoSAA evaluate CRL or Category Rank for reserved seats?",
+        "answer": "For OPEN (General) seats, JoSAA evaluates the All India Common Rank List (CRL). For reserved category seats (OBC-NCL, SC, ST, GEN-EWS, PwD), JoSAA explicitly evaluates the candidate's respective Category Rank against category closing ranks."
       },
       {
-        "question": "Can I get an IIT through JEE Main score?",
-        "answer": "No. Admission to Indian Institutes of Technology (IITs) requires clearing JEE Advanced. JEE Main scores are used for NITs, IIITs, and GFTIs."
+        "question": "How do Home State (HS) and Other State (OS) quotas work in NITs?",
+        "answer": "In National Institutes of Technology (NITs), 50% of the seats are earmarked for Home State (HS) candidates who passed their Class 12 board examination in the state where the NIT is located. The remaining 50% are Other State (OS) seats open to candidates from all other Indian states."
       },
       {
-        "question": "What is CSAB Special Round?",
-        "answer": "The Central Seat Allocation Board (CSAB) conducts two special spot counselling rounds after regular JoSAA rounds to fill remaining vacant seats in NITs, IIITs, and GFTIs."
+        "question": "How does the Female-only seat pool work in JoSAA?",
+        "answer": "To ensure female representation (at least 20%), JoSAA creates supernumerary Female-only seats. Female candidates are eligible to compete in both the Female-only pool and the Gender-Neutral pool, maximizing their admission prospects."
+      },
+      {
+        "question": "Can I predict IIT cutoffs using my JEE Main rank?",
+        "answer": "No. Indian Institutes of Technology (IITs) allocate seats exclusively through JEE Advanced ranks. Our predictor includes IIT historical cutoffs for students entering their JEE Advanced ranks."
       }
     ]
   },

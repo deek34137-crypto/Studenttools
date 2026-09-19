@@ -117,6 +117,7 @@ describe('JEE Calculator Engine', () => {
       const res = predictColleges({ rank: 3000, category: 'OPEN', quota: 'OS' })
       expect(res.length).toBeGreaterThan(0)
       expect(['High', 'Moderate', 'Borderline', 'Low']).toContain(res[0].chance)
+      expect(['WITHIN_CUTOFF', 'NEAR_CUTOFF', 'OUTSIDE_CUTOFF']).toContain(res[0].band)
     })
 
     it('filters cutoffs by institute type and branch', () => {
@@ -127,5 +128,92 @@ describe('JEE Calculator Engine', () => {
         expect(c.branch.toLowerCase()).toContain('computer')
       })
     })
+
+    it('correctly compares Category Rank for reserved candidate', () => {
+      // SC candidate with CRL 150,000 and SC Category Rank 450
+      const res = predictColleges({
+        crlRank: 150000,
+        categoryRank: 450,
+        category: 'SC',
+        quota: 'OS',
+      })
+      expect(res.length).toBeGreaterThan(0)
+      // Find NIT Delhi CSE SC seat: closing rank was 890
+      const nitDelhiSc = res.find(
+        (r) => r.record.institute.includes('Delhi') && r.record.instituteType === 'NIT' && r.record.category === 'SC'
+      )
+      expect(nitDelhiSc).toBeDefined()
+      if (nitDelhiSc) {
+        expect(nitDelhiSc.evaluatedRankType).toBe('Category Rank')
+        expect(nitDelhiSc.evaluatedRank).toBe(450)
+        expect(nitDelhiSc.band).toBe('WITHIN_CUTOFF')
+      }
+    })
+
+    it('resolves Home State (HS) vs Other State (OS) based on candidate state', () => {
+      // Delhi candidate evaluating NIT Delhi
+      const resDelhi = predictColleges({
+        crlRank: 5000,
+        homeState: 'Delhi',
+        quota: 'AUTO',
+        instituteType: 'NIT',
+      })
+      const nitDelhiMatches = resDelhi.filter((r) => r.record.institute.includes('Delhi'))
+      expect(nitDelhiMatches.length).toBeGreaterThan(0)
+      nitDelhiMatches.forEach((r) => {
+        expect(r.record.quota).toBe('HS')
+      })
+
+      // Delhi candidate evaluating NIT Trichy (Tamil Nadu)
+      const nitTrichyMatches = resDelhi.filter((r) => r.record.institute.includes('Tiruchirappalli'))
+      expect(nitTrichyMatches.length).toBeGreaterThan(0)
+      nitTrichyMatches.forEach((r) => {
+        expect(r.record.quota).toBe('OS')
+      })
+    })
+
+    it('handles gender pools: female candidates match both female-only and gender-neutral seats', () => {
+      const resNeutral = predictColleges({
+        crlRank: 2000,
+        gender: 'Gender-Neutral',
+      })
+      const hasFemaleOnlyForNeutral = resNeutral.some((r) => r.record.gender === 'Female-only')
+      expect(hasFemaleOnlyForNeutral).toBe(false)
+
+      const resFemale = predictColleges({
+        crlRank: 2000,
+        gender: 'Female-only',
+      })
+      const hasFemaleOnlyForFemale = resFemale.some((r) => r.record.gender === 'Female-only')
+      const hasNeutralForFemale = resFemale.some((r) => r.record.gender === 'Gender-Neutral')
+      expect(hasFemaleOnlyForFemale).toBe(true)
+      expect(hasNeutralForFemale).toBe(true)
+    })
+
+    it('correctly classifies historical cutoff bands and cushion', () => {
+      // Rank 4500 at NIT Delhi CSE (Round 6 closing rank 5230)
+      const res = predictColleges({
+        crlRank: 4500,
+        category: 'OPEN',
+        quota: 'OS',
+        round: 6,
+      })
+      const nitDelhi = res.find(
+        (r) =>
+          r.record.institute.includes('Delhi') &&
+          r.record.instituteType === 'NIT' &&
+          r.record.branch === 'Computer Science and Engineering' &&
+          r.record.gender === 'Gender-Neutral'
+      )
+
+      expect(nitDelhi).toBeDefined()
+      if (nitDelhi) {
+        expect(nitDelhi.band).toBe('WITHIN_CUTOFF')
+        expect(nitDelhi.rankDiff).toBe(5230 - 4500)
+        expect(nitDelhi.statusDescription).toContain('730')
+      }
+    })
+
   })
 })
+
