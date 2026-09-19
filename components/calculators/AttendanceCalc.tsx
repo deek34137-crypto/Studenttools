@@ -23,7 +23,7 @@ export function AttendanceCalc() {
             min="0"
             max={total}
             value={attended}
-            onChange={(e) => setAttended(Math.max(0, parseInt(e.target.value) || 0))}
+            onChange={(e) => setAttended(Math.max(0, Math.min(total, parseInt(e.target.value) || 0)))}
             className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold text-xl focus:ring-2 focus:ring-sky-500 focus:outline-hidden"
           />
         </div>
@@ -36,7 +36,11 @@ export function AttendanceCalc() {
             type="number"
             min="1"
             value={total}
-            onChange={(e) => setTotal(Math.max(1, parseInt(e.target.value) || 1))}
+            onChange={(e) => {
+              const newTotal = Math.max(1, parseInt(e.target.value) || 1)
+              setTotal(newTotal)
+              if (attended > newTotal) setAttended(newTotal)
+            }}
             className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-900 font-bold text-xl focus:ring-2 focus:ring-sky-500 focus:outline-hidden"
           />
         </div>

@@ -106,9 +106,10 @@ export function calculateJeeMarks(input: JeeMarksInput): JeeMarksResult {
 
     for (const sub of subDefs) {
       const data = input.subjects[sub.key] || { correct: 0, incorrect: 0, unattempted: JEE_MARKING_SCHEME.QUESTIONS_PER_SUBJECT }
-      const c = Math.max(0, Math.floor(data.correct || 0))
-      const inc = Math.max(0, Math.floor(data.incorrect || 0))
       const totalPerSub = JEE_MARKING_SCHEME.QUESTIONS_PER_SUBJECT
+      const c = Math.max(0, Math.min(totalPerSub, Math.floor(data.correct || 0)))
+      const maxInc = totalPerSub - c
+      const inc = Math.max(0, Math.min(maxInc, Math.floor(data.incorrect || 0)))
       const unatt = Math.max(0, totalPerSub - (c + inc))
 
       const attempted = c + inc
@@ -149,12 +150,13 @@ export function calculateJeeMarks(input: JeeMarksInput): JeeMarksResult {
     }
   }
 
-  const correct = Math.max(0, Math.floor(input.correct || 0))
-  const incorrect = Math.max(0, Math.floor(input.incorrect || 0))
+  // Aggregate questions: strictly enforce JEE Main Paper 1 limits (75 total questions)
+  const totalExamQuestions = JEE_MARKING_SCHEME.TOTAL_QUESTIONS
+  const correct = Math.max(0, Math.min(totalExamQuestions, Math.floor(input.correct || 0)))
+  const maxPossibleIncorrect = totalExamQuestions - correct
+  const incorrect = Math.max(0, Math.min(maxPossibleIncorrect, Math.floor(input.incorrect || 0)))
   const totalAttempted = correct + incorrect
-  const unattempted = input.unattempted !== undefined
-    ? Math.max(0, Math.floor(input.unattempted))
-    : Math.max(0, JEE_MARKING_SCHEME.TOTAL_QUESTIONS - totalAttempted)
+  const unattempted = Math.max(0, totalExamQuestions - totalAttempted)
 
   const totalMarks = (correct * JEE_MARKING_SCHEME.CORRECT) + (incorrect * JEE_MARKING_SCHEME.INCORRECT)
   const accuracy = totalAttempted > 0 ? (correct / totalAttempted) * 100 : 0

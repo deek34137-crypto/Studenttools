@@ -24,7 +24,11 @@ export function JeePercentileCalc() {
             min="-75"
             max="300"
             value={marks}
-            onChange={(e) => setMarks(parseInt(e.target.value) || 0)}
+            onChange={(e) => {
+              const val = parseInt(e.target.value)
+              if (isNaN(val)) setMarks(0)
+              else setMarks(Math.max(-75, Math.min(300, val)))
+            }}
             className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-900 font-semibold text-lg focus:ring-2 focus:ring-sky-500 focus:outline-hidden"
           />
           {/* Presets */}

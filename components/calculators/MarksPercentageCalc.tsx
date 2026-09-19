@@ -29,7 +29,16 @@ export function MarksPercentageCalc() {
 
   function updateSubject(index: number, field: keyof SubjectMarkItem, value: any) {
     const next = [...subjects]
-    next[index] = { ...next[index], [field]: value }
+    const updated = { ...next[index], [field]: value }
+    if (field === 'obtained') {
+      const ob = Math.max(0, parseFloat(value) || 0)
+      updated.obtained = Math.min(updated.maxMarks || 100, ob)
+    } else if (field === 'maxMarks') {
+      const mx = Math.max(1, parseFloat(value) || 1)
+      updated.maxMarks = mx
+      if (updated.obtained > mx) updated.obtained = mx
+    }
+    next[index] = updated
     setSubjects(next)
   }
 
@@ -61,8 +70,9 @@ export function MarksPercentageCalc() {
               <input
                 type="number"
                 min="0"
+                max={sub.maxMarks}
                 value={sub.obtained}
-                onChange={(e) => updateSubject(idx, 'obtained', parseFloat(e.target.value) || 0)}
+                onChange={(e) => updateSubject(idx, 'obtained', e.target.value)}
                 className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm font-bold text-slate-900"
               />
             </div>
@@ -71,7 +81,7 @@ export function MarksPercentageCalc() {
                 type="number"
                 min="1"
                 value={sub.maxMarks}
-                onChange={(e) => updateSubject(idx, 'maxMarks', parseFloat(e.target.value) || 100)}
+                onChange={(e) => updateSubject(idx, 'maxMarks', e.target.value)}
                 className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm"
               />
             </div>

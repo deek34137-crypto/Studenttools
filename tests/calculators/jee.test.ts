@@ -32,6 +32,18 @@ describe('JEE Calculator Engine', () => {
       expect(res.accuracyPercentage).toBe(0)
     })
 
+    it('strictly clamps impossible inputs to 75 questions max (e.g. 55 correct, 75 incorrect)', () => {
+      const res = calculateJeeMarks({ correct: 55, incorrect: 75 })
+      // Correct = 55; Incorrect must be capped at 75 - 55 = 20!
+      // Attempted = 55 + 20 = 75; Unattempted = 0
+      // Marks = (55 * 4) - (20 * 1) = 220 - 20 = 200
+      expect(res.attempted).toBe(75)
+      expect(res.correct).toBe(55)
+      expect(res.incorrect).toBe(20)
+      expect(res.unattempted).toBe(0)
+      expect(res.totalMarks).toBe(200)
+    })
+
     it('computes subject breakdown when provided', () => {
       const res = calculateJeeMarks({
         correct: 0,
