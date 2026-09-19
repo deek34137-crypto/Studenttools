@@ -99,7 +99,7 @@ export default async function AdminBlogPage() {
             </div>
             <div className="text-xs text-slate-500 text-right">
               <div>Timezone: <strong className="text-slate-800">{process.env.BLOG_TIMEZONE || 'Asia/Kolkata'}</strong></div>
-              <div>Model: <strong className="text-slate-800">{process.env.GEMINI_MODEL || 'gemini-3.7-flash'}</strong></div>
+              <div>Model: <strong className="text-slate-800">{process.env.GEMINI_MODEL || 'gemini-2.5-flash'}</strong></div>
             </div>
           </div>
         </div>

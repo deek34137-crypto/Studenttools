@@ -128,40 +128,52 @@ OUTPUT JSON SCHEMA:
 Return ONLY the valid JSON object.
 `
 
-  try {
-    const candidateModels = [
-      process.env.GEMINI_MODEL || 'gemini-flash-latest',
-      'gemini-flash-latest',
-      'gemini-3.6-flash',
-      'gemini-3.7-flash',
-    ]
+    const candidateModels = Array.from(
+      new Set(
+        [
+          process.env.GEMINI_MODEL,
+          'gemini-2.5-flash',
+          'gemini-2.5-flash-lite',
+          'gemini-1.5-flash',
+          'gemini-1.5-flash-latest',
+          'gemini-flash-latest',
+          'gemini-2.5-pro',
+        ].filter(Boolean) as string[]
+      )
+    )
 
-  let lastError: any = null
-  let rawText = ''
+    let lastError: any = null
+    let rawText = ''
+    let usedModel = ''
 
-  for (const modelCandidate of candidateModels) {
-    try {
-      const genAI = new GoogleGenerativeAI(apiKey)
-      const model = genAI.getGenerativeModel({
-        model: modelCandidate,
-        generationConfig: {
-          responseMimeType: 'application/json',
-          temperature: 0.3,
-        },
-        systemInstruction,
-      })
+    for (const modelCandidate of candidateModels) {
+      try {
+        const genAI = new GoogleGenerativeAI(apiKey)
+        const model = genAI.getGenerativeModel({
+          model: modelCandidate,
+          generationConfig: {
+            responseMimeType: 'application/json',
+            temperature: 0.3,
+          },
+          systemInstruction,
+        })
 
-      const response = await model.generateContent(prompt)
-      rawText = response.response.text()
-      if (rawText) {
-        lastError = null
-        break
+        const response = await model.generateContent(prompt)
+        rawText = response.response.text()
+        if (rawText) {
+          lastError = null
+          usedModel = modelCandidate
+          break
+        }
+      } catch (err: any) {
+        lastError = err
+        console.warn(`Gemini model ${modelCandidate} failed with: ${err.message}. Trying next candidate...`)
+        // If 503 high demand or 429 rate limit, short delay before fallback
+        if (err?.message?.includes('503') || err?.message?.includes('429')) {
+          await new Promise((resolve) => setTimeout(resolve, 800))
+        }
       }
-    } catch (err: any) {
-      lastError = err
-      console.warn(`Model ${modelCandidate} failed with: ${err.message}. Trying fallback if available...`)
     }
-  }
 
   if (lastError || !rawText) {
     return {

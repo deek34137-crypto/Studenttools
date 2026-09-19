@@ -112,7 +112,7 @@ export async function executeDailyPublishPipeline(options?: {
       await logGeneration({
         id: crypto.randomUUID ? crypto.randomUUID() : `log_${Date.now()}`,
         topic_id: topicId,
-        model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
         result: 'API_ERROR',
         error: errorMsg,
         created_at: new Date().toISOString(),
@@ -147,7 +147,7 @@ export async function executeDailyPublishPipeline(options?: {
       await logGeneration({
         id: crypto.randomUUID ? crypto.randomUUID() : `log_${Date.now()}`,
         topic_id: topicId,
-        model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
         result: 'QUALITY_FAILED',
         validation_result: {
           errors: quality.errors,
@@ -253,7 +253,7 @@ export async function executeDailyPublishPipeline(options?: {
   await logGeneration({
     id: crypto.randomUUID ? crypto.randomUUID() : `log_${Date.now()}`,
     topic_id: topicId,
-    model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+    model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
     result: 'SUCCESS',
     publication_result: publishedUrl,
     created_at: publishedAt,
