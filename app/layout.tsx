@@ -101,6 +101,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <head>
+        {/* Popunder ad */}
+        <script
+          data-cfasync="false"
+          src="https://afders.org/1/9f0ac0f5279e0efce3579ab6578bacc9"
+        />
+        {/* Social Bar ad */}
+        <script
+          data-cfasync="false"
+          src="https://bicea.org/14/28371caac1c4b4a874803efbcbdacfa0"
+        />
         {shouldLoadAdsense && (
           <script
             async
