@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
@@ -101,16 +102,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased scroll-smooth">
       <head>
-        {/* Popunder ad */}
-        <script
-          data-cfasync="false"
-          src="https://afders.org/1/9f0ac0f5279e0efce3579ab6578bacc9"
-        />
-        {/* Social Bar ad */}
-        <script
-          data-cfasync="false"
-          src="https://bicea.org/14/28371caac1c4b4a874803efbcbdacfa0"
-        />
         {shouldLoadAdsense && (
           <script
             async
@@ -123,6 +114,22 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+
+        {/* Adsterra Popunder */}
+        <Script
+          id="adsterra-popunder"
+          src="https://afders.org/1/9f0ac0f5279e0efce3579ab6578bacc9"
+          strategy="afterInteractive"
+          data-cfasync="false"
+        />
+
+        {/* Adsterra Social Bar */}
+        <Script
+          id="adsterra-social-bar"
+          src="https://bicea.org/14/28371caac1c4b4a874803efbcbdacfa0"
+          strategy="afterInteractive"
+          data-cfasync="false"
+        />
       </body>
     </html>
   )
